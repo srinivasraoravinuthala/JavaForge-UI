@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f3efe6"/>
+  <path d="M96 150 v180 a70 70 0 0 0 70 70 H320" fill="none" stroke="#241c16" stroke-width="10"/>
+  <circle cx="96" cy="150" r="12" fill="#6e3b24"/>
+  <circle cx="180" cy="280" r="12" fill="#241c16"/>
+  <circle cx="320" cy="400" r="12" fill="#241c16"/>
+  <text x="96" y="500" fill="#241c16" font-family="Georgia, serif" font-size="72">JavaMastery</text>
+  <text x="96" y="560" fill="#5e564c" font-family="Georgia, serif" font-size="32">Learn Java. Think like an engineer.</text>
+</svg>

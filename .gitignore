@@ -1,0 +1,9 @@
+node_modules
+dist
+public/content
+public/sitemap.xml
+public/robots.txt
+.DS_Store
+*.local
+.env
+.env.*

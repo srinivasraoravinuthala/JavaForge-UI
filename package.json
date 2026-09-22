@@ -1,0 +1,32 @@
+{
+  "name": "javaforge-ui",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "content": "node scripts/build-content.mjs",
+    "dev": "node scripts/build-content.mjs && vite",
+    "build": "node scripts/build-content.mjs && node --experimental-strip-types scripts/check-search.ts && tsc --noEmit && vite build && vite build --ssr src/entry-server.tsx --outDir dist/server && node scripts/prerender.mjs && node scripts/check-output.mjs && node scripts/check-quality.mjs",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@fontsource-variable/literata": "^5.2.8",
+    "@fontsource-variable/public-sans": "^5.2.7",
+    "@fontsource/jetbrains-mono": "^5.2.8",
+    "highlight.js": "^11.11.1",
+    "marked": "^16.2.1",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-router": "^7.17.0",
+    "react-router-dom": "^7.17.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.1",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "tailwindcss": "^4.3.1",
+    "typescript": "~6.0.2",
+    "vite": "^8.0.12"
+  }
+}
