@@ -35,6 +35,8 @@ Cloudflare Pages:
 
 - Build command: `npm run build`
 - Output directory: `dist`
+- If a sibling `../JavaForge` directory already contains `docs/`, the build uses it and does not clone anything.
+- If that directory is missing, the build fetches `https://github.com/srinivasraoravinuthala/JavaForge.git` and checks out `JAVAFORGE_REF`. The default pin is `bddc5ccbd1dbef9aaa9b4b860aca916ac7c98774`. Override the pin with `JAVAFORGE_REF` (commit, tag, or branch). `JAVAFORGE_REPO` overrides the URL and must be https without credentials. The fetch happens only at build time. If JavaForge cannot be obtained, the build fails.
 
 Known routes are real HTML files. Unknown routes use `404.html`. Bookmarks stay out of `robots.txt` and `sitemap.xml`.
 
