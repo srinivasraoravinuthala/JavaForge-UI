@@ -1,5 +1,6 @@
 import { spawnSync } from 'node:child_process'
-import { existsSync, rmSync } from 'node:fs'
+import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -7,6 +8,7 @@ const UI_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const EXPECTED = resolve(UI_ROOT, '..', 'JavaForge')
 const DEFAULT_REPO = 'https://github.com/srinivasraoravinuthala/JavaForge.git'
 const DEFAULT_REF = 'bddc5ccbd1dbef9aaa9b4b860aca916ac7c98774'
+const ARCHIVE_HOSTS = new Set(['github.com', 'codeload.github.com'])
 
 const repo = process.env.JAVAFORGE_REPO || DEFAULT_REPO
 const ref = process.env.JAVAFORGE_REF || DEFAULT_REF
@@ -31,6 +33,7 @@ function assertPublicRepo(url) {
   if (parsed.protocol !== 'https:' || parsed.username || parsed.password) {
     fail('JAVAFORGE_REPO must be an https URL without credentials.')
   }
+  return parsed
 }
 
 function assertRef(value) {
@@ -39,11 +42,21 @@ function assertRef(value) {
   }
 }
 
-function git(args, cwd) {
-  const result = spawnSync('git', args, { cwd, stdio: 'inherit' })
-  if (result.error) return result.error
-  if (result.status !== 0) return new Error(`git ${args[0]} exited ${result.status}`)
-  return null
+function githubArchive(repoUrl, revision) {
+  const parsed = assertPublicRepo(repoUrl)
+  if (parsed.hostname !== 'github.com') {
+    fail('JAVAFORGE_REPO must be a github.com repository. Only GitHub commit archives are supported.')
+  }
+  const parts = parsed.pathname.replace(/\.git$/i, '').split('/').filter(Boolean)
+  if (parts.length !== 2 || !/^[\w.-]+$/.test(parts[0]) || !/^[\w.-]+$/.test(parts[1])) {
+    fail('JAVAFORGE_REPO must be https://github.com/<owner>/<repository>.')
+  }
+  const [owner, name] = parts
+  return {
+    name,
+    root: `${name}-${revision}`,
+    url: `https://github.com/${owner}/${name}/archive/${encodeURIComponent(revision)}.tar.gz`,
+  }
 }
 
 function removeCheckout() {
@@ -55,42 +68,100 @@ function removeCheckout() {
   }
 }
 
+function removeArchive(path) {
+  try {
+    rmSync(path, { force: true, maxRetries: 5, retryDelay: 100 })
+  } catch {
+    // The extracted tree is the build input. A leftover temp archive is not.
+  }
+}
+
+async function download(url, dest) {
+  let current = url
+  for (let hop = 0; hop < 5; hop += 1) {
+    const response = await fetch(current, { redirect: 'manual' })
+    if (response.status >= 300 && response.status < 400) {
+      const location = response.headers.get('location')
+      if (!location) fail(`The archive redirect from ${current} had no location.`)
+      const next = new URL(location, current)
+      if (next.protocol !== 'https:' || next.username || next.password || !ARCHIVE_HOSTS.has(next.hostname)) {
+        fail(`Refusing archive redirect to ${next.href}.`)
+      }
+      current = next.href
+      continue
+    }
+    if (!response.ok) {
+      fail(`The archive download failed with HTTP ${response.status} for ${url}.`)
+    }
+    writeFileSync(dest, Buffer.from(await response.arrayBuffer()))
+    return
+  }
+  fail(`Too many redirects while downloading ${url}.`)
+}
+
+function tar(args) {
+  const result = spawnSync('tar', args, { encoding: 'utf8' })
+  if (result.error) return { error: result.error, status: result.status, stdout: '', stderr: '' }
+  return { error: null, status: result.status, stdout: result.stdout || '', stderr: result.stderr || '' }
+}
+
+function archiveRoots(listing) {
+  const roots = new Set()
+  for (const line of listing.split(/\r?\n/)) {
+    const entry = line.trim().replace(/^\.\//, '')
+    if (!entry) continue
+    roots.add(entry.split('/')[0])
+  }
+  return roots
+}
+
 if (existsSync(join(EXPECTED, 'docs'))) {
   console.log(`Using local JavaForge at ${EXPECTED}`)
   process.exit(0)
 }
 
-assertPublicRepo(repo)
 assertRef(ref)
+const archive = githubArchive(repo, ref)
 
 if (existsSync(EXPECTED)) {
   fail(`A directory already exists at ${EXPECTED} but it has no docs/. Remove it or point the build at a complete JavaForge checkout.`)
 }
 
-console.log(`Fetching JavaForge ${ref} into ${EXPECTED}`)
-let error = git(['clone', repo, EXPECTED], dirname(EXPECTED))
-if (error) {
-  removeCheckout()
-  if (error.code === 'ENOENT') fail('git is not available on PATH.')
-  fail('git clone failed. The repository could not be reached.')
-}
-error = git(['checkout', '--detach', ref], EXPECTED)
-if (error) {
-  removeCheckout()
-  fail('git checkout failed. The revision may not exist in the cloned repository.')
-}
-if (/^[0-9a-f]{40}$/i.test(ref)) {
-  const parsed = spawnSync('git', ['rev-parse', 'HEAD'], { cwd: EXPECTED, encoding: 'utf8' })
-  const head = (parsed.stdout || '').trim()
-  if (parsed.status !== 0 || head.toLowerCase() !== ref.toLowerCase()) {
-    removeCheckout()
-    fail(`The checkout is ${head || 'unknown'}, which is not the requested revision.`)
+console.log('JavaForge not found locally')
+console.log(`Downloading JavaForge ${ref} archive`)
+const archivePath = join(tmpdir(), `javaforge-${process.pid}.tar.gz`)
+try {
+  await download(archive.url, archivePath)
+  const listed = tar(['-tzf', archivePath])
+  if (listed.error?.code === 'ENOENT') fail('tar is not available on PATH, so the JavaForge archive could not be extracted.')
+  if (listed.status !== 0) fail(`The downloaded file is not a readable tar archive. ${listed.stderr}`.trim())
+  const roots = archiveRoots(listed.stdout)
+  if (/^[0-9a-f]{40}$/i.test(ref)) {
+    if (roots.size !== 1 || !roots.has(archive.root)) {
+      fail(`The archive root was ${[...roots].join(', ') || 'empty'}, which does not match the requested revision ${ref}.`)
+    }
+  } else if (roots.size !== 1) {
+    fail(`The archive did not contain a single top-level directory (${[...roots].join(', ') || 'empty'}).`)
   }
+
+  console.log('Extracting...')
+  mkdirSync(EXPECTED, { recursive: true })
+  const extracted = tar(['-xzf', archivePath, '-C', EXPECTED, '--strip-components=1'])
+  if (extracted.status !== 0) {
+    removeCheckout()
+    fail(`Extracting the JavaForge archive failed. ${extracted.stderr}`.trim())
+  }
+} catch (error) {
+  removeCheckout()
+  if (error?.code === 'EEXIT') throw error
+  fail(error?.message || 'The JavaForge archive could not be downloaded.')
+} finally {
+  removeArchive(archivePath)
 }
 
 if (!existsSync(join(EXPECTED, 'docs'))) {
   removeCheckout()
-  fail('The fetched revision does not contain docs/.')
+  fail('The downloaded revision does not contain docs/.')
 }
 
 console.log(`Fetched JavaForge ${ref}`)
