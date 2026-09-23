@@ -1,16 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { searchDocuments, type SearchDocument } from '../search'
-
-const KIND: Record<SearchDocument['type'], string> = {
-  lesson: 'Lesson',
-  example: 'Code',
-  interview: 'Interview',
-  leetcode: 'LeetCode',
-  project: 'Project',
-  reference: 'Reference',
-  version: 'Version',
-}
+import { SEARCH_TYPE_LABEL, searchDocuments, searchResultMeta, type SearchDocument } from '../search'
 
 interface SearchDialogProps {
   open: boolean
@@ -121,7 +111,7 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
       }}
     >
       <div className="search-bar">
-        <h2 id={titleId} className="search-title">Search JavaMastery</h2>
+        <h2 id={titleId} className="search-title">Search JavaForge</h2>
         <button className="text-button" type="button" onClick={onClose}>Close</button>
       </div>
       <input
@@ -147,29 +137,32 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
             onClose()
           }
         }}
-        placeholder="Search JavaMastery"
-        aria-label="Search JavaMastery"
+        placeholder="Search JavaForge"
+        aria-label="Search JavaForge"
         autoComplete="off"
         enterKeyHint="search"
       />
       <p className={results.length ? 'visually-hidden' : 'search-note'} role="status">{message}</p>
       {results.length > 0 ? (
         <ul id={listId} className="search-results" role="listbox" aria-label="Search results">
-          {results.map((result, index) => (
-            <li key={result.id} id={`${listId}-${index}`} role="option" aria-selected={index === current}>
-              <Link
-                className="search-hit"
-                to={result.url}
-                onClick={onClose}
-                onMouseMove={() => setActive(index)}
-              >
-                <span className="search-kind">{KIND[result.type]}</span>
-                <span className="search-hit-title">{result.title}</span>
-                {result.description ? <span className="search-hit-detail">{result.description}</span> : null}
-                {result.hint ? <span className="mono">{result.hint}</span> : null}
-              </Link>
-            </li>
-          ))}
+          {results.map((result, index) => {
+            const meta = searchResultMeta(result)
+            return (
+              <li key={result.id} id={`${listId}-${index}`} role="option" aria-selected={index === current}>
+                <Link
+                  className="search-hit"
+                  to={result.url}
+                  onClick={onClose}
+                  onMouseMove={() => setActive(index)}
+                >
+                  <span className="search-kind">{SEARCH_TYPE_LABEL[result.type]}</span>
+                  <span className="search-hit-title">{result.title}</span>
+                  {result.description ? <span className="search-hit-detail">{result.description}</span> : null}
+                  {meta ? <span className="search-hit-meta mono">{meta}</span> : null}
+                </Link>
+              </li>
+            )
+          })}
         </ul>
       ) : null}
     </dialog>

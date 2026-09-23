@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "precontent": "node scripts/ensure-javaforge.mjs",
-    "content": "node scripts/build-content.mjs",
+    "content": "node scripts/build-content.mjs && node scripts/build-concepts.mjs",
     "predev": "node scripts/ensure-javaforge.mjs",
-    "dev": "node scripts/build-content.mjs && vite",
+    "dev": "node scripts/build-content.mjs && node scripts/build-concepts.mjs && vite",
     "prebuild": "node scripts/ensure-javaforge.mjs",
-    "build": "node scripts/build-content.mjs && node --experimental-strip-types scripts/check-search.ts && tsc --noEmit && vite build && vite build --ssr src/entry-server.tsx --outDir dist/server && node scripts/prerender.mjs && node scripts/check-output.mjs && node scripts/check-quality.mjs",
+    "build": "node scripts/build-content.mjs && node scripts/build-concepts.mjs && node --experimental-strip-types scripts/check-concepts.ts && node --experimental-strip-types scripts/check-search.ts && tsc --noEmit && vite build && vite build --ssr src/entry-server.tsx --outDir dist/server && node scripts/prerender.mjs && node scripts/check-output.mjs && node scripts/check-quality.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

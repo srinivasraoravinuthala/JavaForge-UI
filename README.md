@@ -1,6 +1,6 @@
 # JavaForge-UI
 
-Static site for **JavaMastery**. The content and Java source live in the sibling [JavaForge](../JavaForge) repository. This project copies them at build time and deploys as files. There is no backend, database, or runtime GitHub API.
+Static site for **JavaForge**. The content and Java source live in the sibling [JavaForge](../JavaForge) repository. This project copies them at build time and deploys as files. There is no backend, database, or runtime GitHub API.
 
 ## Scripts
 

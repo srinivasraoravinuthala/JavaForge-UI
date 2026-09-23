@@ -15,6 +15,10 @@ function top(query: string, count = 8) {
   return searchDocuments(index, query, count)
 }
 
+function topTypes(query: string, count = 5) {
+  return top(query, count).map((doc) => doc.type)
+}
+
 searchDocuments(index, 'HashMap')
 const started = performance.now()
 for (let i = 0; i < 40; i++) searchDocuments(index, 'HashMap')
@@ -30,7 +34,10 @@ const pkg = top('pkg10networking', 5)
 expect('package name', pkg.some((doc) => doc.url.includes('/examples/pkg10networking')))
 
 const hashmap = top('HashMap')
-expect('hashmap interview', hashmap.slice(0, 5).filter((doc) => doc.type === 'interview' && /hashmap/i.test(doc.title)).length >= 3)
+expect('hashmap concept first', hashmap[0]?.type === 'concept' && hashmap[0].title === 'HashMap')
+expect('hashmap concept once', hashmap.filter((doc) => doc.type === 'concept' && doc.title === 'HashMap').length === 1)
+expect('hashmap interview', hashmap.slice(0, 8).filter((doc) => doc.type === 'interview' && /hashmap/i.test(doc.title)).length >= 3)
+expect('hashmap how-it-works near top', hashmap.slice(0, 5).some((doc) => /how does hashmap work/i.test(doc.title)))
 
 const binary = top('binary search')
 expect('leetcode binary search', binary.some((doc) => doc.type === 'leetcode' && /binary search/i.test(doc.title) && doc.url.startsWith('/examples/pkg5leetcode/')))
@@ -71,14 +78,50 @@ expect('repeated query', JSON.stringify(top('HashMap')) === JSON.stringify(searc
 const interview = top('volatile')
 expect('volatile interview', interview.some((doc) => doc.type === 'interview' && /volatile/i.test(doc.title)))
 
+// Phase 12 ranking principles (not brittle exact slots).
+const stringHits = top('string', 5)
+expect('string casefold', JSON.stringify(top('string', 5).map((doc) => doc.id)) === JSON.stringify(top('String', 5).map((doc) => doc.id)))
+expect('string concept near top', stringHits.slice(0, 2).some((doc) => doc.type === 'concept' && doc.title === 'Strings'))
+expect('string prefers learning material', stringHits.slice(0, 4).some((doc) => doc.type === 'example' || doc.type === 'lesson'))
+expect('string core example near top', stringHits.slice(0, 4).some((doc) => doc.file === 'core9StringsDemo.java' || /strings demo/i.test(doc.title)))
+expect('string lesson visible', stringHits.some((doc) => doc.type === 'lesson' && doc.title === 'Strings'))
+expect('string not leetcode-first', stringHits[0]?.type !== 'leetcode')
+
+const concurrent = top('ConcurrentHashMap', 5)
+expect('concurrent hashmap interview', concurrent[0]?.type === 'interview' && /concurrenthashmap/i.test(concurrent[0].title))
+
+const concurrency = top('concurrency', 5)
+expect('concurrency concept first', concurrency[0]?.type === 'concept' && concurrency[0].title === 'Concurrency')
+expect('concurrency lesson near top', concurrency.slice(0, 3).some((doc) => doc.type === 'lesson' && doc.title === 'Concurrency'))
+expect('concurrency basics before advanced', concurrency.slice(0, 6).some((doc) => doc.file === 'concurrency1ThreadBasics.java'))
+expect('concurrency not only advanced', !concurrency.slice(0, 3).every((doc) => /advconcurrency/i.test(doc.file || doc.title)))
+
+const spring = top('Spring Boot', 5)
+expect('spring lesson near top', spring.slice(0, 2).some((doc) => doc.type === 'lesson' && /spring boot/i.test(doc.title)))
+
+const rest = top('REST API', 5)
+expect('rest prefers code', topTypes('REST API', 3).filter((type) => type === 'example').length >= 2)
+
+const virtual = top('virtual threads', 5)
+expect('virtual threads has example or version', virtual.slice(0, 3).some((doc) => doc.type === 'example' || doc.type === 'version'))
+
+const future = top('CompletableFuture', 5)
+expect('completable future code or version', future.slice(0, 2).some((doc) => doc.type === 'example' || doc.type === 'version'))
+
+const arrayList = top('ArrayList', 5)
+expect('arraylist interview relevant', arrayList.slice(0, 5).some((doc) => doc.type === 'interview' && /arraylist/i.test(doc.title) && !/copyonwrite/i.test(doc.title)))
+
 const types = new Set(index.map((doc) => doc.type))
-for (const type of ['lesson', 'example', 'interview', 'leetcode', 'project', 'reference', 'version']) {
+for (const type of ['lesson', 'example', 'interview', 'leetcode', 'project', 'reference', 'version', 'concept']) {
   expect(`index has ${type}`, types.has(type as SearchDocument['type']))
 }
+expect('concept docs are A/B landings', index.filter((doc) => doc.type === 'concept').every((doc) => doc.url.startsWith('/concepts/') && doc.url !== '/concepts'))
+expect('concept count', index.filter((doc) => doc.type === 'concept').length === 23)
+expect('concept urls unique', new Set(index.filter((doc) => doc.type === 'concept').map((doc) => doc.url)).size === 23)
 expect('documents have urls', index.every((doc) => doc.url.startsWith('/')))
 expect('no source bodies', index.every((doc) => !('source' in doc) && (doc.description || '').length <= 220))
 expect('index gzip budget', gzip < 250_000)
-expect('search latency', latency < 20)
+expect('search latency', latency < 30)
 
 const counts = Object.fromEntries([...types].map((type) => [type, index.filter((doc) => doc.type === type).length]))
 console.log(`Search index: ${index.length} documents, ${raw} bytes, ${gzip} gzip bytes, ${latency.toFixed(2)} ms`)

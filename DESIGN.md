@@ -1,6 +1,6 @@
 # Design foundation
 
-Public name: JavaMastery. The interface is a reading environment for a curriculum, not a marketing page and not a dashboard.
+Public name: JavaForge. The interface is a reading environment for a curriculum, not a marketing page and not a dashboard.
 
 ## Type
 
@@ -43,7 +43,7 @@ Color and underline changes only. `prefers-reduced-motion: reduce` removes trans
 
 ## Navigation
 
-Desktop: wordmark, Learn, Code, Projects, a search control labeled “Search JavaMastery” with Ctrl K, the source repository, and the theme control. Mobile: the same header keeps Search and the theme control; a bottom bar has Home, Learn, Code, and Projects. Search opens a dialog. The index is not connected yet. Targets are at least 44px. Focus is a 2px outline.
+Desktop: wordmark, Learn, Code, Projects, a search control labeled “Search JavaForge” with Ctrl K, the source repository, and the theme control. Mobile: the same header keeps Search and the theme control; a bottom bar has Home, Learn, Code, and Projects. Search opens a dialog. The index is not connected yet. Targets are at least 44px. Focus is a 2px outline.
 
 ## Mark
 

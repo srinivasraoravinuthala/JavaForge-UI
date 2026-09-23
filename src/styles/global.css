@@ -428,7 +428,7 @@ a:hover { text-decoration-thickness: 2px; }
   }
   .search-hit { grid-template-columns: minmax(0, 1fr); }
   .search-kind { grid-column: 1; }
-  .search-hit-detail, .search-hit .mono { grid-column: 1; }
+  .search-hit-detail, .search-hit-meta { grid-column: 1; }
   .catalog .mono { overflow-wrap: anywhere; }
   .site-header { gap: 0.45rem; padding: 0 0.75rem; }
 }
@@ -503,6 +503,7 @@ a:hover { text-decoration-thickness: 2px; }
   color: inherit;
   text-decoration: none;
   align-items: baseline;
+  min-width: 0;
 }
 .search-kind {
   font-size: 0.75rem;
@@ -510,9 +511,19 @@ a:hover { text-decoration-thickness: 2px; }
   text-transform: uppercase;
   color: var(--muted);
 }
-.search-hit-title { font-weight: 650; }
-.search-hit-detail, .search-hit .mono { grid-column: 2; }
+.search-hit-title {
+  font-weight: 650;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+.search-hit-detail,
+.search-hit-meta {
+  grid-column: 2;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
 .search-hit-detail { color: var(--text-secondary); font-size: 0.92rem; }
+.search-hit-meta { color: var(--muted); font-size: 0.82rem; }
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -540,6 +551,127 @@ a:hover { text-decoration-thickness: 2px; }
 .band { border-top: 1px solid var(--line); margin-top: 2.25rem; padding-top: 1.1rem; }
 .band h2 { font-family: var(--font-read); font-size: 1.45rem; margin: 0 0 0.45rem; text-wrap: balance; }
 .band-note { margin: 0 0 0.8rem; }
+
+.concept-fit-trail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.5rem;
+  list-style: none;
+  margin: 0 0 0.75rem;
+  padding: 0;
+  max-width: var(--measure);
+}
+.concept-fit-trail li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--ink);
+  font-family: var(--font-read);
+}
+.concept-fit-trail li:not(:last-child)::after {
+  content: "→";
+  color: var(--muted);
+}
+.concept-fit-trail a {
+  color: var(--ink);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.concept-resource-list,
+.concept-index-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 48rem;
+}
+.concept-resource-list li,
+.concept-index-list li {
+  border-bottom: 1px solid var(--line);
+  padding: 0.95rem 0;
+}
+.concept-resource {
+  display: grid;
+  gap: 0.35rem;
+}
+.concept-resource-title,
+.concept-index-title {
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 650;
+  font-size: 1.05rem;
+  overflow-wrap: anywhere;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+.concept-resource-title:hover,
+.concept-index-link:hover .concept-index-title {
+  color: var(--accent);
+}
+.concept-resource-meta,
+.concept-index-meta {
+  color: var(--muted);
+  font-size: 0.92rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.85rem;
+}
+.concept-resource-desc {
+  margin: 0;
+  max-width: var(--measure);
+  color: var(--text-secondary);
+  font-family: var(--font-read);
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+.concept-resource-action {
+  justify-self: start;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.95rem;
+}
+.concept-index-link {
+  display: grid;
+  gap: 0.25rem;
+  text-decoration: none;
+  color: inherit;
+}
+.concept-index-link:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.related-concepts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.85rem;
+  margin: 0 0 1rem;
+  max-width: var(--measure);
+}
+.related-concepts-label {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.related-concepts-link {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 650;
+}
+
+@media (max-width: 480px) {
+  .concept-resource-meta,
+  .concept-index-meta {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .bottom-nav a { font-size: 0.8rem; }
+}
 .split { display: grid; gap: 1.5rem; }
 @media (min-width: 800px) { .split { grid-template-columns: 1fr 1fr; } }
 .path, .plain, .timeline { list-style: none; margin: 0; padding: 0; }

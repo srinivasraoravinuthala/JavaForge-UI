@@ -190,7 +190,7 @@ function displayTitle(title) {
 }
 
 function pageTitle(name) {
-  return `${displayTitle(name)} | JavaMastery`
+  return `${displayTitle(name)} | JavaForge`
 }
 
 const CURRICULUM = [
@@ -550,7 +550,7 @@ for (const doc of docs) {
   const stage = stageOf(chapterNo(doc))
   const shown = displayTitle(doc.title)
   const crumb = [
-    { name: 'JavaMastery', href: '/' },
+    { name: 'JavaForge', href: '/' },
     { name: sectionLabel(doc.section), href: sectionHref(doc.section) },
     ...(stage ? [{ name: stage[1], href: stages.find((item) => item.id === stage[0])?.href || doc.url }] : []),
     { name: shown, href: doc.url },
@@ -646,13 +646,13 @@ const plans = ['blind75', 'official75', 'interview150', 'top100'].map((folder) =
 writeJson(join(OUT, 'home.json'), basePage({
   kind: 'home',
   url: '/',
-  title: 'Learn Java. Think like an engineer. | JavaMastery',
+  title: 'Learn Java. Think like an engineer. | JavaForge',
   description: 'A Java curriculum from the first program through the JVM, concurrency, backend work, and interviews. Start at chapter 1, then open the matching source file.',
   canonicalPath: '/',
   jsonLd: {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'JavaMastery',
+    name: 'JavaForge',
     url: SITE,
     description: 'Learn Java from the first program through the JVM, concurrency, and interviews.',
     inLanguage: 'en',
@@ -677,15 +677,15 @@ writeJson(join(OUT, 'home.json'), basePage({
 writeJson(join(OUT, 'versions.json'), basePage({
   kind: 'versions',
   url: VERSION_INDEX,
-  title: 'Java versions | JavaMastery',
+  title: 'Java versions | JavaForge',
   description: 'Java 6 through Java 25, one page per release. Preview, incubator, and experimental features keep the status they had in that release.',
   canonicalPath: VERSION_INDEX,
   breadcrumbs: [
-    { name: 'JavaMastery', href: '/' },
+    { name: 'JavaForge', href: '/' },
     { name: 'Java versions', href: VERSION_INDEX },
   ],
   jsonLd: breadcrumbLd([
-    { name: 'JavaMastery', href: '/' },
+    { name: 'JavaForge', href: '/' },
     { name: 'Java versions', href: VERSION_INDEX },
   ]),
   catalog: JAVA_VERSIONS.map((release) => ({
@@ -700,14 +700,14 @@ writeJson(join(OUT, 'versions.json'), basePage({
 
 for (const release of JAVA_VERSIONS) {
   const crumbs = [
-    { name: 'JavaMastery', href: '/' },
+    { name: 'JavaForge', href: '/' },
     { name: 'Java versions', href: VERSION_INDEX },
     { name: `Java ${release.version}`, href: release.url },
   ]
   writeJson(join(OUT, 'versions', `java-${release.version}.json`), basePage({
     kind: release.version === 25 ? 'java25' : 'version',
     url: release.url,
-    title: `Java ${release.version} | JavaMastery`,
+    title: `Java ${release.version} | JavaForge`,
     description: release.description,
     canonicalPath: release.url,
     breadcrumbs: crumbs,
@@ -727,15 +727,15 @@ for (const release of JAVA_VERSIONS) {
 writeJson(join(OUT, 'learn.json'), basePage({
   kind: 'learn',
   url: '/learn',
-  title: 'Learning path | JavaMastery',
+  title: 'Learning path | JavaForge',
   description: `${learnDocs.length} chapters in study order, from the first program through Spring and a browser client. Filename numbers stay stable. This page is the sequence.`,
   canonicalPath: '/learn',
   breadcrumbs: [
-    { name: 'JavaMastery', href: '/' },
+    { name: 'JavaForge', href: '/' },
     { name: 'Learning path', href: '/learn' },
   ],
   jsonLd: breadcrumbLd([
-    { name: 'JavaMastery', href: '/' },
+    { name: 'JavaForge', href: '/' },
     { name: 'Learning path', href: '/learn' },
   ]),
   learn: { stages },
@@ -744,15 +744,15 @@ writeJson(join(OUT, 'learn.json'), basePage({
 writeJson(join(OUT, 'examples.json'), basePage({
   kind: 'examples',
   url: '/examples',
-  title: 'Java examples | JavaMastery',
+  title: 'Java examples | JavaForge',
   description: 'Java source in curriculum order, from the first program through Spring. Files are listed by study order, so pattern 2 comes before pattern 10.',
   canonicalPath: '/examples',
   breadcrumbs: [
-    { name: 'JavaMastery', href: '/' },
+    { name: 'JavaForge', href: '/' },
     { name: 'Examples', href: '/examples' },
   ],
   jsonLd: breadcrumbLd([
-    { name: 'JavaMastery', href: '/' },
+    { name: 'JavaForge', href: '/' },
     { name: 'Examples', href: '/examples' },
   ]),
   packages: packagePages.map(({ pkg, role, count, url }) => ({ pkg, role, count, url })),
@@ -764,18 +764,18 @@ for (const page of packagePages) {
   writeJson(join(OUT, 'examples', `${page.pkg}.json`), basePage({
     kind: 'package',
     url: page.url,
-    title: leetcodePage ? 'LeetCode solutions | JavaMastery' : `${page.role} examples | JavaMastery`,
+    title: leetcodePage ? 'LeetCode solutions | JavaForge' : `${page.role} examples | JavaForge`,
     description: leetcodePage
       ? `${solutionCount} Java solutions in pkg5leetcode, listed in the study-plan order published in the repository. Each page shows that source file.`
       : `${page.role}. ${page.count} files in ${page.pkg}, listed in study order. Single-file examples show the java command. Maven and Gradle examples say so.`,
     canonicalPath: page.url,
     breadcrumbs: [
-      { name: 'JavaMastery', href: '/' },
+      { name: 'JavaForge', href: '/' },
       { name: 'Examples', href: '/examples' },
       { name: page.role, href: page.url },
     ],
     jsonLd: breadcrumbLd([
-      { name: 'JavaMastery', href: '/' },
+      { name: 'JavaForge', href: '/' },
       { name: 'Examples', href: '/examples' },
       { name: page.role, href: page.url },
     ]),
@@ -798,19 +798,19 @@ for (const example of examples.filter((e) => e.url)) {
   writeJson(join(OUT, 'examples', example.pkg, `${example.className}.json`), basePage({
     kind: 'example',
     url: example.url,
-    title: lc ? `${shown}${number} · ${lc.plan} | JavaMastery` : `${example.className} | JavaMastery`,
+    title: lc ? `${shown}${number} · ${lc.plan} | JavaForge` : `${example.className} | JavaForge`,
     description: lc
       ? `${lc.plan}. ${example.className}.java. ${lc.approach || lc.description || 'Java solution from the curriculum.'}`.replace(/\s+/g, ' ').slice(0, 180)
       : `${example.role}. ${modeLabel}${example.runCommand ? `. Command: ${example.runCommand}.` : '.'}`,
     canonicalPath: example.url,
     breadcrumbs: [
-      { name: 'JavaMastery', href: '/' },
+      { name: 'JavaForge', href: '/' },
       { name: 'Examples', href: '/examples' },
       { name: example.role, href: `/examples/${example.pkg}` },
       { name: shown, href: example.url },
     ],
     jsonLd: breadcrumbLd([
-      { name: 'JavaMastery', href: '/' },
+      { name: 'JavaForge', href: '/' },
       { name: 'Examples', href: '/examples' },
       { name: example.role, href: `/examples/${example.pkg}` },
       { name: shown, href: example.url },
@@ -838,15 +838,15 @@ for (const example of examples.filter((e) => e.url)) {
 writeJson(join(OUT, 'projects.json'), basePage({
   kind: 'projects',
   url: '/projects',
-  title: 'Projects | JavaMastery',
+  title: 'Projects | JavaForge',
   description: 'Five hands-on labs unlocked after the matching chapter: a gradebook, an OOP library, a JDK HTTP server, a Spring Boot notes API, and a small web client.',
   canonicalPath: '/projects',
   breadcrumbs: [
-    { name: 'JavaMastery', href: '/' },
+    { name: 'JavaForge', href: '/' },
     { name: 'Projects', href: '/projects' },
   ],
   jsonLd: breadcrumbLd([
-    { name: 'JavaMastery', href: '/' },
+    { name: 'JavaForge', href: '/' },
     { name: 'Projects', href: '/projects' },
   ]),
   projects: projectCatalog,
@@ -855,7 +855,7 @@ writeJson(join(OUT, 'projects.json'), basePage({
 writeJson(join(OUT, 'bookmarks.json'), basePage({
   kind: 'bookmarks',
   url: '/bookmarks',
-  title: 'Bookmarks | JavaMastery',
+  title: 'Bookmarks | JavaForge',
   description: 'Pages you save in this browser.',
   canonicalPath: '/bookmarks',
   robots: 'noindex,follow',
@@ -890,7 +890,7 @@ writeFileSync(join(UI_ROOT, 'public', 'sitemap.xml'), sitemap)
 writeFileSync(join(UI_ROOT, 'public', 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /bookmarks\n\nSitemap: ${SITE}/sitemap.xml\n`)
 
 if (mdFiles.length !== 89) throw new Error(`Expected 89 markdown files, found ${mdFiles.length}`)
-if (javaFiles.length !== 440) throw new Error(`Expected 440 Java files, found ${javaFiles.length}`)
+if (javaFiles.length !== 441) throw new Error(`Expected 441 Java files, found ${javaFiles.length}`)
 for (const release of JAVA_VERSIONS) {
   for (const example of [...release.examples, ...release.features.map((feature) => feature.example).filter(Boolean)]) {
     const source = `${example.href.replace(/^\/examples\//, '')}.java`
@@ -1067,6 +1067,31 @@ function searchDoc(partial) {
     doc[key] = value
   }
   return doc
+}
+
+/** Humanize a class name for search display without inventing curriculum text. */
+function exampleSearchTitle(className) {
+  return className
+    .replace(/([a-z])(\d)/g, '$1 $2')
+    .replace(/(\d)([A-Za-z])/g, '$1 $2')
+    .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
+    .replace(/\s+/g, ' ')
+    .trim() || className
+}
+
+/** Pull the existing EXPLANATION block from a Java file header when present. */
+function exampleExplanation(source) {
+  const match = source.match(/EXPLANATION:\s*([\s\S]*?)(?:\*\/|$)/i)
+  if (!match) return null
+  const text = match[1]
+    .split(/\r?\n/)
+    .map((line) => line.replace(/^\s*\*\s?/, '').trim())
+    .filter((line) => line && !line.startsWith('/'))
+    .join(' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+  return text ? text.slice(0, 180) : null
 }
 
 function leetcodeFolder(path) {
@@ -1382,14 +1407,20 @@ function buildSearchIndex() {
     const lc = example.leetcode
     const leetcode = lc && !lc.helper
     const number = leetcode ? lc.problemNumber : null
+    const explanation = leetcode ? null : exampleExplanation(example.source)
+    const description = leetcode
+      ? [lc?.description, lc?.approach, lc?.complexity].filter(Boolean).join(' ').slice(0, 180)
+      : explanation
     documents.push(searchDoc({
       id: `${leetcode ? 'leetcode' : 'example'}:${example.path}`,
       type: leetcode ? 'leetcode' : 'example',
-      title: lc?.title || `${example.className}.java`,
+      title: lc?.title || exampleSearchTitle(example.className),
       url: example.url,
-      description: [lc?.description, lc?.approach, lc?.complexity].filter(Boolean).join(' ').slice(0, 180),
+      description,
       file: `${example.className}.java`,
-      hint: lc ? `${lc.plan} · ${example.path}` : `${example.role} · ${example.path}`,
+      hint: lc
+        ? [lc.plan, lc.grouping?.name, example.path].filter(Boolean).join(' · ')
+        : [example.role, example.path].filter(Boolean).join(' · '),
       topic: lc ? lc.plan : example.role,
       pkg: example.pkg,
       keywords: [
@@ -1397,6 +1428,7 @@ function buildSearchIndex() {
         example.className,
         example.role,
         example.exampleType,
+        exampleSearchTitle(example.className),
         example.requiredJava ? `Requires Java ${example.requiredJava}` : null,
         lc?.plan,
         lc?.grouping?.name,
