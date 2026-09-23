@@ -1,6 +1,6 @@
 export interface SearchDocument {
   id: string
-  type: 'lesson' | 'example' | 'interview' | 'leetcode' | 'project' | 'reference' | 'version'
+  type: 'lesson' | 'example' | 'interview' | 'leetcode' | 'project' | 'reference' | 'version' | 'concept'
   title: string
   url: string
   description?: string
@@ -10,6 +10,29 @@ export interface SearchDocument {
   pkg?: string
   headings?: string
   keywords?: string[]
+}
+
+export const SEARCH_TYPE_LABEL: Record<SearchDocument['type'], string> = {
+  concept: 'Concept',
+  example: 'Code',
+  lesson: 'Lesson',
+  reference: 'Reference',
+  leetcode: 'LeetCode',
+  interview: 'Interview',
+  project: 'Project',
+  version: 'Version',
+}
+
+/** Soft preference only. Must stay well below a title exact/phrase gap. */
+const TYPE_BOOST: Record<SearchDocument['type'], number> = {
+  concept: 220,
+  example: 90,
+  lesson: 85,
+  reference: 50,
+  project: 40,
+  leetcode: 25,
+  version: 20,
+  interview: 15,
 }
 
 export function normalize(value: string): string {
@@ -22,6 +45,7 @@ export function normalize(value: string): string {
 interface Norm {
   title: string
   titleFlat: string
+  titleTokens: string[]
   file: string
   fileFlat: string
   topic: string
@@ -33,6 +57,9 @@ interface Norm {
   keywords: string
   keywordsFlat: string
   anchor: boolean
+  pkg: string
+  type: SearchDocument['type']
+  rapid: boolean
 }
 
 const normCache = new WeakMap<SearchDocument[], Norm[]>()
@@ -51,6 +78,7 @@ function toNorm(doc: SearchDocument): Norm {
   return {
     title,
     titleFlat: flat(title),
+    titleTokens: title.split(' ').filter(Boolean),
     file,
     fileFlat: flat(file),
     topic,
@@ -62,6 +90,9 @@ function toNorm(doc: SearchDocument): Norm {
     keywords,
     keywordsFlat: flat(keywords),
     anchor: doc.url.includes('#'),
+    pkg: doc.pkg || '',
+    type: doc.type,
+    rapid: doc.id.includes(':rapid:'),
   }
 }
 
@@ -74,8 +105,37 @@ function normsFor(documents: SearchDocument[]): Norm[] {
   return norms
 }
 
-function includesBounded(haystack: string, needle: string): boolean {
-  if (!needle || !haystack.includes(needle)) return false
+function tokenEquals(a: string, b: string): boolean {
+  if (a === b) return true
+  if (a.length < 2 || b.length < 2) return false
+  if (a === `${b}s` || b === `${a}s`) return true
+  if (a === `${b}es` || b === `${a}es`) return true
+  return false
+}
+
+/** Whole-token / whole-phrase match on spaced text. Avoids "string" inside "substring". */
+function includesPhrase(haystack: string, phrase: string): boolean {
+  if (!haystack || !phrase) return false
+  if (haystack === phrase) return true
+  const hay = haystack.split(' ').filter(Boolean)
+  const needle = phrase.split(' ').filter(Boolean)
+  if (!needle.length || hay.length < needle.length) return false
+  for (let i = 0; i <= hay.length - needle.length; i += 1) {
+    let ok = true
+    for (let j = 0; j < needle.length; j += 1) {
+      if (!tokenEquals(hay[i + j], needle[j])) {
+        ok = false
+        break
+      }
+    }
+    if (ok) return true
+  }
+  return false
+}
+
+/** Identifier match on squeezed text with digit-aware boundaries. */
+function includesIdentifier(haystack: string, needle: string): boolean {
+  if (!needle || needle.length < 4 || !haystack.includes(needle)) return false
   if (!/\d/.test(needle)) return true
   let from = 0
   while (from < haystack.length) {
@@ -89,12 +149,39 @@ function includesBounded(haystack: string, needle: string): boolean {
   return false
 }
 
-function covers(text: string, squeezed: string, phrase: string, phraseFlat: string, tokens: string[]): 'exact' | 'phrase' | 'tokens' | '' {
+type Hit = 'exact' | 'starts' | 'phrase' | 'tokens' | ''
+
+function covers(text: string, squeezed: string, phrase: string, phraseFlat: string, tokens: string[]): Hit {
   if (!text) return ''
   if (text === phrase) return 'exact'
-  if (includesBounded(text, phrase) || (phraseFlat.length > 1 && includesBounded(squeezed, phraseFlat))) return 'phrase'
-  if (tokens.length > 0 && tokens.every((token) => includesBounded(squeezed, token))) return 'tokens'
+  if (text.startsWith(`${phrase} `) || text === phrase) return text === phrase ? 'exact' : 'starts'
+  if (text.startsWith(phrase) && text.length > phrase.length && !/[a-z0-9]/.test(text[phrase.length])) return 'starts'
+  if (includesPhrase(text, phrase)) return 'phrase'
+  if (phraseFlat.length > 3 && includesIdentifier(squeezed, phraseFlat)) return 'phrase'
+  if (tokens.length > 0 && tokens.every((token) => includesPhrase(text, token) || (token.length > 3 && includesIdentifier(squeezed, token)))) {
+    return 'tokens'
+  }
   return ''
+}
+
+function hitScore(hit: Hit, exact: number, starts: number, phrase: number, tokens: number): number {
+  if (hit === 'exact') return exact
+  if (hit === 'starts') return starts
+  if (hit === 'phrase') return phrase
+  if (hit === 'tokens') return tokens
+  return 0
+}
+
+function packageBoost(norm: Norm): number {
+  if (norm.type !== 'example') return 0
+  const pkg = norm.pkg
+  if (!pkg) return 8
+  if (/adv/i.test(pkg)) return -20
+  if (pkg === 'pkg0intro' || pkg === 'pkg1core') return 55
+  if (pkg === 'pkg7concurrency' || pkg === 'pkg3datastructures' || pkg === 'pkg4algorithms') return 28
+  if (pkg === 'pkg12restapi' || pkg === 'pkg11jdbc' || pkg === 'pkg10networking') return 22
+  if (pkg === 'pkg19performance') return 0
+  return 12
 }
 
 function scoreDocument(norm: Norm, phrase: string, phraseFlat: string, tokens: string[]): number {
@@ -105,25 +192,106 @@ function scoreDocument(norm: Norm, phrase: string, phraseFlat: string, tokens: s
   const headingHit = covers(norm.headings, norm.headingsFlat, phrase, phraseFlat, tokens)
   const descriptionHit = covers(norm.description, norm.descriptionFlat, phrase, phraseFlat, tokens)
   const keywordHit = covers(norm.keywords, norm.keywordsFlat, phrase, phraseFlat, tokens)
-  if (titleHit === 'exact') score += 1000
-  else if (titleHit === 'phrase') score += 720
-  else if (titleHit === 'tokens') score += 520
-  if (fileHit === 'exact') score += 680
-  else if (fileHit === 'phrase') score += 600
-  else if (fileHit === 'tokens') score += 460
-  if (topicHit === 'exact') score += 440
-  else if (topicHit === 'phrase') score += 360
-  else if (topicHit === 'tokens') score += 240
-  if (headingHit === 'phrase') score += 280
-  else if (headingHit === 'tokens') score += 180
-  if (descriptionHit === 'phrase') score += 160
-  else if (descriptionHit === 'tokens') score += 70
-  if (keywordHit === 'phrase') score += 140
-  else if (keywordHit === 'tokens') score += 50
-  const primary = `${norm.title} ${norm.file} ${norm.topic} ${norm.headings}`
-  if (tokens.length > 1 && tokens.every((token) => includesBounded(primary, token))) score += 220
-  if (score > 0 && norm.anchor) score += 30
+  const titleTokens = norm.titleTokens.length
+  const titleParts = norm.titleTokens
+
+  score += hitScore(titleHit, 1000, 900, 780, 540)
+
+  // CamelCase queries like HashMap become "hash map". Prefer the bare type over ConcurrentHashMap.
+  if (titleHit && phrase.includes(' ') && phraseFlat.length >= 6) {
+    if (
+      norm.titleFlat === phraseFlat
+      || norm.titleFlat.startsWith(phraseFlat)
+      || norm.titleFlat.includes(`howdoes${phraseFlat}`)
+      || norm.titleFlat.includes(`whatis${phraseFlat}`)
+    ) {
+      score += 120
+    }
+    const hay = titleParts
+    const needle = phrase.split(' ').filter(Boolean)
+    for (let i = 0; i <= hay.length - needle.length; i += 1) {
+      if (needle.every((part, j) => tokenEquals(hay[i + j], part)) && i > 0) {
+        if (/^(concurrent|linked|identity|weak|enum|copyonwrite|tree|write)/.test(hay[i - 1])) {
+          score -= 160
+          break
+        }
+      }
+    }
+    if (/copyonwrite|concurrent|linkedhash|identityhash/.test(norm.titleFlat) && norm.titleFlat.includes(phraseFlat) && !norm.titleFlat.startsWith(phraseFlat)) {
+      score -= 120
+    }
+  }
+
+  // File confirms identity; keep below title so problem filenames cannot bury concept pages.
+  if (fileHit === 'exact') score += titleHit ? 220 : 680
+  else if (fileHit === 'starts') score += titleHit ? 160 : 520
+  else if (fileHit === 'phrase') score += titleHit ? 120 : 420
+  else if (fileHit === 'tokens') score += titleHit ? 80 : 300
+
+  // Topic/parent-page labels often repeat the query for every child row — dampen when title already matched.
+  const topicPoints = hitScore(topicHit, 400, 340, 300, 200)
+  score += titleHit ? Math.floor(topicPoints * 0.2) : topicPoints
+  const headingPoints = hitScore(headingHit, 0, 0, 260, 170)
+  score += titleHit ? Math.floor(headingPoints * 0.35) : headingPoints
+  score += hitScore(descriptionHit, 0, 0, 140, 60)
+  score += hitScore(keywordHit, 0, 0, 120, 45)
+
+  if (tokens.length > 1) {
+    const primary = `${norm.title} ${norm.file} ${norm.topic} ${norm.headings}`
+    if (tokens.every((token) => includesPhrase(primary, token) || (token.length > 3 && includesIdentifier(flat(primary), token)))) {
+      score += 200
+    }
+  }
+
+  // Concept-shaped titles: short lesson/reference titles that are the query itself.
+  if (
+    (titleHit === 'exact' || titleHit === 'phrase')
+    && titleTokens <= 2
+    && (norm.type === 'lesson' || norm.type === 'reference')
+  ) {
+    score += 180
+  }
+
+  // Exact concept titles are the navigation entry for a topic.
+  if (norm.type === 'concept' && titleHit) {
+    if (titleHit === 'exact') score += 420
+    else if (titleHit === 'starts') score += 280
+    else if (titleHit === 'phrase') score += 200
+    else score += 80
+  }
+
+  // Prefer fuller interview questions over short head-token matches ("HashMap null keys?").
+  if (norm.type === 'interview' && titleHit) {
+    const explanatory = /^(how |what |why |when |is |does |can |should )/.test(norm.title)
+    if (titleHit === 'starts' && !explanatory && titleTokens <= 6) score -= 140
+    if (titleTokens >= 5 && includesPhrase(norm.title, phrase)) score += 90
+    if (explanatory && includesPhrase(norm.title, phrase)) score += 130
+    if (tokens.length === 1 && norm.title.includes(' vs ')) score -= 70
+  }
+
+  if (score > 0 && norm.anchor) score += 25
+  if (score > 0 && norm.rapid) score -= 35
+
+  if (score > 0) {
+    score += TYPE_BOOST[norm.type] || 0
+    score += packageBoost(norm)
+  }
   return score
+}
+
+/**
+ * Meta line for result rows: topic, package, and file when present.
+ * Falls back to the prebuilt hint. Does not invent copy.
+ * Concept rows put the inventory line in description only.
+ */
+export function searchResultMeta(doc: SearchDocument): string {
+  if (doc.type === 'concept') return ''
+  const parts: string[] = []
+  if (doc.topic) parts.push(doc.topic)
+  if (doc.pkg && !parts.some((part) => part.includes(doc.pkg!))) parts.push(doc.pkg)
+  if (doc.file && !parts.some((part) => part.includes(doc.file!))) parts.push(doc.file)
+  if (parts.length) return parts.join(' · ')
+  return doc.hint || ''
 }
 
 export function searchDocuments(documents: SearchDocument[], query: string, limit = 12): SearchDocument[] {
@@ -136,11 +304,25 @@ export function searchDocuments(documents: SearchDocument[], query: string, limi
     .map((token) => normalize(token).replace(/ /g, ''))
     .filter((token) => token.length > 1)
   const norms = normsFor(documents)
-  const scored: { doc: SearchDocument; score: number }[] = []
+  const scored: { doc: SearchDocument; score: number; url: string; rapid: boolean }[] = []
   for (let i = 0; i < documents.length; i++) {
     const score = scoreDocument(norms[i], phrase, phraseFlat, tokens)
-    if (score > 0) scored.push({ doc: documents[i], score })
+    if (score > 0) {
+      scored.push({ doc: documents[i], score, url: documents[i].url, rapid: norms[i].rapid })
+    }
   }
   scored.sort((a, b) => b.score - a.score || a.doc.title.localeCompare(b.doc.title) || a.doc.id.localeCompare(b.doc.id))
-  return scored.slice(0, limit).map((row) => row.doc)
+
+  // Drop weaker rapid-fire rows that only point at the same unscoped page URL.
+  const seenRapidUrls = new Set<string>()
+  const deduped: typeof scored = []
+  for (const row of scored) {
+    if (row.rapid && !row.url.includes('#')) {
+      if (seenRapidUrls.has(row.url)) continue
+      seenRapidUrls.add(row.url)
+    }
+    deduped.push(row)
+  }
+
+  return deduped.slice(0, limit).map((row) => row.doc)
 }

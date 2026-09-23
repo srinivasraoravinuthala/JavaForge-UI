@@ -112,6 +112,8 @@ function PageView({ page }: { page: PageData }) {
   if (page.kind === 'bookmarks') return <Bookmarks />
   if (page.kind === 'versions' && page.catalog) return <VersionsPage page={page} />
   if ((page.kind === 'version' || page.kind === 'java25') && page.release) return <VersionPage page={page} />
+  if (page.kind === 'concepts' && page.conceptsIndex) return <ConceptsIndex page={page} />
+  if (page.kind === 'concept' && page.conceptPage) return <ConceptDetail page={page} />
   return (
     <>
       <h1 className="page-title">Page not found</h1>
@@ -311,6 +313,7 @@ function Doc({ page }: { page: PageData }) {
         ) : null}
         <article className="doc">
           <p className="kicker">{doc.stageLabel || doc.sectionLabel}</p>
+          <RelatedConcepts items={page.relatedConcepts} />
           {page.url === '/docs/02-learn--21-JavaVersions' || page.url === '/docs/04-reference--01-JavaVersions' ? (
             <p className="band-note"><Link to="/versions">Java 6 through Java 25</Link> each have a version page. This page still describes the earlier versions, including Java 21. <Link to="/versions/java-25">Java 25</Link> is a later release.</p>
           ) : null}
@@ -475,11 +478,14 @@ function LeetCodeIndex({ page }: { page: PageData }) {
 
 function ExamplePage({ page }: { page: PageData }) {
   const example = page.example!
-  if (example.leetcode) return <LeetCodeSolution example={example} crumbs={page.breadcrumbs} />
+  if (example.leetcode) {
+    return <LeetCodeSolution example={example} crumbs={page.breadcrumbs} relatedConcepts={page.relatedConcepts} />
+  }
   return (
     <>
       <Breadcrumbs crumbs={page.breadcrumbs} />
       <p className="kicker">{example.role}</p>
+      <RelatedConcepts items={page.relatedConcepts} />
       <h1 className="page-title">{example.className}</h1>
       <dl className="facts">
         <div><dt>Path</dt><dd className="mono">{example.path}</dd></div>
@@ -499,13 +505,22 @@ function ExamplePage({ page }: { page: PageData }) {
   )
 }
 
-function LeetCodeSolution({ example, crumbs }: { example: NonNullable<PageData['example']>; crumbs?: PageData['breadcrumbs'] }) {
+function LeetCodeSolution({
+  example,
+  crumbs,
+  relatedConcepts,
+}: {
+  example: NonNullable<PageData['example']>
+  crumbs?: PageData['breadcrumbs']
+  relatedConcepts?: PageData['relatedConcepts']
+}) {
   const meta = example.leetcode!
   const title = meta.title || example.className
   return (
     <>
       <Breadcrumbs crumbs={crumbs} />
       <p className="kicker">{meta.plan}</p>
+      <RelatedConcepts items={relatedConcepts} />
       <h1 className="page-title">{title}</h1>
       <dl className="facts">
         {meta.problemNumber ? <div><dt>Problem</dt><dd>LC {meta.problemNumber}</dd></div> : null}
@@ -588,8 +603,8 @@ function VersionPage({ page }: { page: PageData }) {
     lessons.push(feature.lesson)
   }
   const projectLabel = release.projectUrl.includes('openjdk.org') || release.projectUrl.includes('openjdk.java.net')
-    ? `OpenJDK JDK ${release.version} (leaves JavaMastery)`
-    : 'Oracle Java SE specifications (leaves JavaMastery)'
+    ? `OpenJDK JDK ${release.version} (leaves JavaForge)`
+    : 'Oracle Java SE specifications (leaves JavaForge)'
 
   return (
     <>
@@ -634,7 +649,7 @@ function VersionPage({ page }: { page: PageData }) {
               <p className="solution-meta">{feature.jep ? `JEP ${feature.jep} · ` : ''}{feature.status} · {feature.category}</p>
               <p>{feature.summary}</p>
               {feature.history ? <p>{feature.history}</p> : null}
-              {feature.jepUrl ? <p><a href={feature.jepUrl} rel="noopener noreferrer">OpenJDK JEP {feature.jep} (leaves JavaMastery)</a></p> : null}
+              {feature.jepUrl ? <p><a href={feature.jepUrl} rel="noopener noreferrer">OpenJDK JEP {feature.jep} (leaves JavaForge)</a></p> : null}
               {feature.lesson ? <p>Related reading: <Link to={feature.lesson.href}>{feature.lesson.title}</Link></p> : null}
               {feature.example ? <p>Curriculum file: <Link to={feature.example.href}>{feature.example.title}</Link></p> : null}
             </article>
@@ -698,6 +713,154 @@ function Projects({ page }: { page: PageData }) {
   )
 }
 
+function ConceptsIndex({ page }: { page: PageData }) {
+  const index = page.conceptsIndex!
+  const groups = index.groups?.length
+    ? index.groups
+    : [{ id: 'all', label: 'Concepts', items: index.items || [] }]
+  const total = groups.reduce((sum, group) => sum + group.items.length, 0)
+  return (
+    <>
+      <Breadcrumbs crumbs={page.breadcrumbs} />
+      <p className="kicker">Discovery</p>
+      <h1 className="page-title">Concepts</h1>
+      <p className="lede">
+        {index.blurb || 'Entry points into the curriculum. Each page links existing lessons, code, interview material, and practice.'}
+      </p>
+      <p className="band-note">{total} concepts in the current A/B slice.</p>
+      {groups.map((group) => (
+        group.items.length === 0 ? null : (
+          <section key={group.id} className="band" aria-labelledby={`concepts-${group.id}`}>
+            <h2 id={`concepts-${group.id}`}>{group.label}</h2>
+            {group.note ? <p className="band-note">{group.note}</p> : null}
+            <ul className="concept-index-list">
+              {group.items.map((item) => {
+                const signals = [
+                  item.signals?.lesson ? 'Lesson' : null,
+                  item.signals?.code ? 'Code' : null,
+                  item.signals?.practice ? 'Practice' : null,
+                  item.signals?.interview ? 'Interview' : null,
+                  item.signals?.project ? 'Project' : null,
+                ].filter(Boolean)
+                return (
+                  <li key={item.slug}>
+                    <Link to={item.href} className="concept-index-link">
+                      <span className="concept-index-title">{item.title}</span>
+                      <span className="concept-index-meta">
+                        {item.topic ? <span>{item.topic}</span> : null}
+                        {signals.length ? <span>{signals.join(' · ')}</span> : <span>{item.resources} resources</span>}
+                      </span>
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </section>
+        )
+      ))}
+    </>
+  )
+}
+
+function ConceptDetail({ page }: { page: PageData }) {
+  const concept = page.conceptPage!
+  const sections: {
+    id: string
+    label: string
+    note?: string
+    refs: NonNullable<PageData['conceptPage']>['groups']['lessons']
+    action: string
+  }[] = [
+    { id: 'learn', label: 'Learn', note: 'Existing chapters for this concept.', refs: concept.groups.lessons, action: 'Open lesson' },
+    { id: 'code', label: 'See it in code', note: 'Existing Java examples.', refs: concept.groups.examples, action: 'Open example' },
+    { id: 'reference', label: 'Reference', refs: concept.groups.references, action: 'Open reference' },
+    { id: 'practice', label: 'Practice', note: 'Existing LeetCode material in JavaForge.', refs: concept.groups.leetcode, action: 'Open practice' },
+    { id: 'interview', label: 'Prepare', note: 'Existing interview questions.', refs: concept.groups.interviews, action: 'Open question' },
+    { id: 'projects', label: 'Projects', refs: concept.groups.projects, action: 'Open project' },
+    { id: 'versions', label: 'Java versions', refs: concept.groups.versions, action: 'Open version note' },
+  ]
+  return (
+    <>
+      <Breadcrumbs crumbs={page.breadcrumbs} />
+      <p className="kicker">Concept</p>
+      <h1 className="page-title">{concept.title}</h1>
+      <p className="lede">{concept.summary || page.description}</p>
+      {concept.aliases.length ? (
+        <p className="caption">Also known as {concept.aliases.join(', ')}.</p>
+      ) : null}
+
+      {concept.fit && concept.fit.length > 0 ? (
+        <section className="band concept-fit" aria-labelledby="concept-fit">
+          <h2 id="concept-fit">Where it fits</h2>
+          <ol className="concept-fit-trail">
+            {concept.fit.map((step, index) => (
+              <li key={`${step.label}-${index}`}>
+                {step.href ? <Link to={step.href}>{step.label}</Link> : <span>{step.label}</span>}
+              </li>
+            ))}
+          </ol>
+          {concept.packageLabels && concept.packageLabels.length > 0 ? (
+            <p className="band-note">
+              Packages:{' '}
+              {concept.packageLabels.map((row, index) => (
+                <span key={row.pkg}>
+                  {index > 0 ? ', ' : null}
+                  <Link to={`/examples/${row.pkg}`}>{row.role}</Link>
+                  <span className="mono"> ({row.pkg})</span>
+                </span>
+              ))}
+            </p>
+          ) : null}
+        </section>
+      ) : null}
+
+      {sections.filter((section) => section.refs.length > 0).map((section) => (
+        <section key={section.id} className="band" aria-labelledby={`concept-${section.id}`}>
+          <h2 id={`concept-${section.id}`}>{section.label}</h2>
+          {section.note ? <p className="band-note">{section.note}</p> : null}
+          <ul className="concept-resource-list">
+            {section.refs.map((ref) => (
+              <li key={`${section.id}:${ref.url}`}>
+                <div className="concept-resource">
+                  <Link className="concept-resource-title" to={ref.url}>{ref.title}</Link>
+                  {(ref.context || ref.pkg || ref.file) ? (
+                    <p className="concept-resource-meta">
+                      {[ref.context, ref.pkg, ref.file].filter(Boolean).join(' · ')}
+                    </p>
+                  ) : null}
+                  {ref.description ? <p className="concept-resource-desc">{ref.description}</p> : null}
+                  <Link className="concept-resource-action" to={ref.url}>{section.action} →</Link>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+
+      {concept.related.length > 0 ? (
+        <section className="band" aria-labelledby="concept-related">
+          <h2 id="concept-related">Related concepts</h2>
+          <p className="band-note">Only explicit or deterministic relationships from the concept model.</p>
+          <ul className="concept-resource-list">
+            {concept.related.map((rel) => (
+              <li key={rel.href}>
+                <div className="concept-resource">
+                  <Link className="concept-resource-title" to={rel.href}>{rel.title}</Link>
+                  <p className="concept-resource-meta">
+                    {rel.kind === 'explicit' ? 'Explicit link' : 'Deterministic link'}
+                  </p>
+                  {rel.evidence ? <p className="concept-resource-desc">{rel.evidence}</p> : null}
+                  <Link className="concept-resource-action" to={rel.href}>Open concept →</Link>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+    </>
+  )
+}
+
 function Bookmarks() {
   const [items, setItems] = useState<Bookmark[] | null>(null)
   useEffect(() => {
@@ -715,6 +878,23 @@ function Bookmarks() {
         </ul>
       )}
     </>
+  )
+}
+
+function RelatedConcepts({ items }: { items?: { title: string; href: string }[] }) {
+  if (!items?.length) return null
+  return (
+    <p className="related-concepts">
+      <span className="related-concepts-label">
+        Related concept{items.length === 1 ? '' : 's'}
+      </span>
+      {items.map((item) => (
+        <Link key={item.href} className="related-concepts-link" to={item.href}>
+          {item.title}
+          <span aria-hidden="true"> →</span>
+        </Link>
+      ))}
+    </p>
   )
 }
 

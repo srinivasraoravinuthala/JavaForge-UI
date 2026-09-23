@@ -1,0 +1,2567 @@
+{
+  "generatedAt": "2026-09-23",
+  "source": {
+    "searchIndex": "public/content/search-index.json",
+    "pages": "public/content/pages/**/*.json",
+    "note": "Deterministic evidence only. No authored concept prose. No inferred relationships beyond explicit markdown links and strong title/file/keyword matches."
+  },
+  "coverageScale": {
+    "A": "Strong: >=4 strong resource types, or >=3 types with >=8 strong hits",
+    "B": "Good: >=3 strong types, or >=2 types with >=5 strong hits",
+    "C": "Partial: >=2 strong types, or 1 strong type plus broader weak hits",
+    "D": "Weak: incidental strong/weak hits only",
+    "E": "Ambiguous: insufficient evidence"
+  },
+  "summary": {
+    "inventoryCount": 58,
+    "coverageDistribution": {
+      "A": 15,
+      "B": 8,
+      "C": 12,
+      "D": 23,
+      "E": 0
+    },
+    "structuralPatterns": {
+      "lessonCode": 19,
+      "lessonCodeInterview": 13,
+      "lessonCodeLeetcode": 4,
+      "lessonCodeInterviewLeetcode": 3,
+      "conceptProject": 5,
+      "versionExample": 11
+    }
+  },
+  "inventory": [
+    {
+      "concept": "Abstraction & Interfaces",
+      "slug": "abstractioninterfaces",
+      "origin": "lesson-title",
+      "coverage": "D",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 0,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Algorithms",
+      "slug": "algorithms",
+      "origin": "lesson-title",
+      "coverage": "A",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 7,
+        "references": 0,
+        "interviews": 3,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 2
+      }
+    },
+    {
+      "concept": "ArrayList",
+      "slug": "arraylist",
+      "origin": "type-name-evidence",
+      "coverage": "C",
+      "strongCounts": {
+        "lessons": 0,
+        "examples": 0,
+        "references": 0,
+        "interviews": 14,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Arrays",
+      "slug": "arrays",
+      "origin": "lesson-title",
+      "coverage": "A",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 2,
+        "references": 0,
+        "interviews": 36,
+        "leetcode": 31,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Classes & Objects",
+      "slug": "classesobjects",
+      "origin": "lesson-title",
+      "coverage": "C",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 0,
+        "references": 0,
+        "interviews": 1,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Collections",
+      "slug": "collections",
+      "origin": "lesson-title",
+      "coverage": "A",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 2,
+        "references": 0,
+        "interviews": 28,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 4
+      }
+    },
+    {
+      "concept": "CompletableFuture",
+      "slug": "completablefuture",
+      "origin": "type-name-evidence",
+      "coverage": "B",
+      "strongCounts": {
+        "lessons": 0,
+        "examples": 1,
+        "references": 0,
+        "interviews": 5,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 1
+      }
+    },
+    {
+      "concept": "Concurrency",
+      "slug": "concurrency",
+      "origin": "lesson-title",
+      "coverage": "A",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 15,
+        "references": 1,
+        "interviews": 7,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 10
+      }
+    },
+    {
+      "concept": "ConcurrentHashMap",
+      "slug": "concurrenthashmap",
+      "origin": "type-name-evidence",
+      "coverage": "D",
+      "strongCounts": {
+        "lessons": 0,
+        "examples": 0,
+        "references": 0,
+        "interviews": 4,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Constructors & Encapsulation",
+      "slug": "constructorsencapsulation",
+      "origin": "lesson-title",
+      "coverage": "D",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 0,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Control Flow",
+      "slug": "controlflow",
+      "origin": "lesson-title",
+      "coverage": "C",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 0,
+        "references": 0,
+        "interviews": 1,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "CountDownLatch",
+      "slug": "countdownlatch",
+      "origin": "type-name-evidence",
+      "coverage": "C",
+      "strongCounts": {
+        "lessons": 0,
+        "examples": 1,
+        "references": 0,
+        "interviews": 2,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Data Structures",
+      "slug": "datastructures",
+      "origin": "lesson-title",
+      "coverage": "A",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 13,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 1,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Design Patterns",
+      "slug": "designpatterns",
+      "origin": "lesson-title",
+      "coverage": "A",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 23,
+        "references": 1,
+        "interviews": 1,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Exceptions",
+      "slug": "exceptions",
+      "origin": "lesson-title",
+      "coverage": "A",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 1,
+        "references": 0,
+        "interviews": 53,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 1
+      }
+    },
+    {
+      "concept": "ExecutorService",
+      "slug": "executorservice",
+      "origin": "type-name-evidence",
+      "coverage": "D",
+      "strongCounts": {
+        "lessons": 0,
+        "examples": 0,
+        "references": 0,
+        "interviews": 1,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "File I/O & NIO",
+      "slug": "fileionio",
+      "origin": "lesson-title",
+      "coverage": "D",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 0,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Generics",
+      "slug": "generics",
+      "origin": "lesson-title",
+      "coverage": "A",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 1,
+        "references": 0,
+        "interviews": 32,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 1
+      }
+    },
+    {
+      "concept": "Getting Started",
+      "slug": "gettingstarted",
+      "origin": "lesson-title",
+      "coverage": "D",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 0,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "HashMap",
+      "slug": "hashmap",
+      "origin": "type-name-evidence",
+      "coverage": "B",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 3,
+        "references": 0,
+        "interviews": 18,
+        "leetcode": 6,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "HashSet",
+      "slug": "hashset",
+      "origin": "type-name-evidence",
+      "coverage": "C",
+      "strongCounts": {
+        "lessons": 0,
+        "examples": 0,
+        "references": 0,
+        "interviews": 5,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "HttpClient",
+      "slug": "httpclient",
+      "origin": "type-name-evidence",
+      "coverage": "B",
+      "strongCounts": {
+        "lessons": 0,
+        "examples": 2,
+        "references": 0,
+        "interviews": 3,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 1
+      }
+    },
+    {
+      "concept": "Inheritance & Polymorphism",
+      "slug": "inheritancepolymorphism",
+      "origin": "lesson-title",
+      "coverage": "C",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 0,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Interview Prep",
+      "slug": "interviewprep",
+      "origin": "lesson-title",
+      "coverage": "D",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 0,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Java Version Features (5 ΓåÆ 21)",
+      "slug": "javaversionfeatures521",
+      "origin": "lesson-title",
+      "coverage": "D",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 0,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "JDBC & Databases",
+      "slug": "jdbcdatabases",
+      "origin": "lesson-title",
+      "coverage": "C",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 0,
+        "references": 1,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "JVM & Memory",
+      "slug": "jvmmemory",
+      "origin": "lesson-title",
+      "coverage": "D",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 0,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Lambdas & Functional Programming",
+      "slug": "lambdasfunctionalprogramming",
+      "origin": "lesson-title",
+      "coverage": "D",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 0,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "LeetCode Practice",
+      "slug": "leetcodepractice",
+      "origin": "lesson-title",
+      "coverage": "D",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 0,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "LinkedHashMap",
+      "slug": "linkedhashmap",
+      "origin": "type-name-evidence",
+      "coverage": "D",
+      "strongCounts": {
+        "lessons": 0,
+        "examples": 0,
+        "references": 0,
+        "interviews": 3,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "LinkedList",
+      "slug": "linkedlist",
+      "origin": "type-name-evidence",
+      "coverage": "A",
+      "strongCounts": {
+        "lessons": 0,
+        "examples": 3,
+        "references": 0,
+        "interviews": 5,
+        "leetcode": 14,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Loops",
+      "slug": "loops",
+      "origin": "lesson-title",
+      "coverage": "A",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 1,
+        "references": 0,
+        "interviews": 6,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Metaprogramming",
+      "slug": "metaprogramming",
+      "origin": "lesson-title",
+      "coverage": "B",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 5,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Methods",
+      "slug": "methods",
+      "origin": "lesson-title",
+      "coverage": "A",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 4,
+        "references": 0,
+        "interviews": 41,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 13
+      }
+    },
+    {
+      "concept": "Modules & SPI",
+      "slug": "modulesspi",
+      "origin": "lesson-title",
+      "coverage": "B",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 4,
+        "references": 1,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Networking & HTTP",
+      "slug": "networkinghttp",
+      "origin": "lesson-title",
+      "coverage": "D",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 0,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Operators & Casting",
+      "slug": "operatorscasting",
+      "origin": "lesson-title",
+      "coverage": "D",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 0,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Optional",
+      "slug": "optional",
+      "origin": "type-name-evidence",
+      "coverage": "A",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 1,
+        "references": 0,
+        "interviews": 12,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 2
+      }
+    },
+    {
+      "concept": "Performance & Build Tools",
+      "slug": "performancebuildtools",
+      "origin": "lesson-title",
+      "coverage": "D",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 0,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "PreparedStatement",
+      "slug": "preparedstatement",
+      "origin": "type-name-evidence",
+      "coverage": "D",
+      "strongCounts": {
+        "lessons": 0,
+        "examples": 0,
+        "references": 0,
+        "interviews": 1,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Records & Sealed Classes",
+      "slug": "recordssealedclasses",
+      "origin": "lesson-title",
+      "coverage": "D",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 0,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 1,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "ReentrantLock",
+      "slug": "reentrantlock",
+      "origin": "type-name-evidence",
+      "coverage": "D",
+      "strongCounts": {
+        "lessons": 0,
+        "examples": 0,
+        "references": 0,
+        "interviews": 2,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Resilience Patterns",
+      "slug": "resiliencepatterns",
+      "origin": "lesson-title",
+      "coverage": "B",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 4,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "REST & Frontend",
+      "slug": "restfrontend",
+      "origin": "lesson-title",
+      "coverage": "D",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 0,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 1,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "REST APIs",
+      "slug": "restapis",
+      "origin": "lesson-title",
+      "coverage": "C",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 0,
+        "references": 1,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 1,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Semaphore",
+      "slug": "semaphore",
+      "origin": "type-name-evidence",
+      "coverage": "B",
+      "strongCounts": {
+        "lessons": 0,
+        "examples": 1,
+        "references": 0,
+        "interviews": 4,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Serialization & Data Formats",
+      "slug": "serializationdataformats",
+      "origin": "lesson-title",
+      "coverage": "D",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 0,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Spring Boot Intro",
+      "slug": "springbootintro",
+      "origin": "lesson-title",
+      "coverage": "D",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 0,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 1,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Standard Libraries",
+      "slug": "standardlibraries",
+      "origin": "lesson-title",
+      "coverage": "B",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 8,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Static Members & Enums",
+      "slug": "staticmembersenums",
+      "origin": "lesson-title",
+      "coverage": "D",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 0,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Stream",
+      "slug": "stream",
+      "origin": "type-name-evidence",
+      "coverage": "A",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 3,
+        "references": 0,
+        "interviews": 45,
+        "leetcode": 1,
+        "projects": 0,
+        "versions": 7
+      }
+    },
+    {
+      "concept": "Streams & Optional",
+      "slug": "streamsoptional",
+      "origin": "lesson-title",
+      "coverage": "C",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 0,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "StringBuilder",
+      "slug": "stringbuilder",
+      "origin": "type-name-evidence",
+      "coverage": "C",
+      "strongCounts": {
+        "lessons": 0,
+        "examples": 0,
+        "references": 0,
+        "interviews": 10,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Strings",
+      "slug": "strings",
+      "origin": "lesson-title",
+      "coverage": "A",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 2,
+        "references": 0,
+        "interviews": 52,
+        "leetcode": 29,
+        "projects": 0,
+        "versions": 5
+      }
+    },
+    {
+      "concept": "Testing",
+      "slug": "testing",
+      "origin": "lesson-title",
+      "coverage": "A",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 8,
+        "references": 1,
+        "interviews": 2,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "TreeMap",
+      "slug": "treemap",
+      "origin": "type-name-evidence",
+      "coverage": "D",
+      "strongCounts": {
+        "lessons": 0,
+        "examples": 0,
+        "references": 0,
+        "interviews": 4,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "User Input",
+      "slug": "userinput",
+      "origin": "lesson-title",
+      "coverage": "C",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 1,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 1,
+        "versions": 0
+      }
+    },
+    {
+      "concept": "Variables & Types",
+      "slug": "variablestypes",
+      "origin": "lesson-title",
+      "coverage": "C",
+      "strongCounts": {
+        "lessons": 1,
+        "examples": 0,
+        "references": 0,
+        "interviews": 0,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 1
+      }
+    }
+  ],
+  "focus": [
+    {
+      "concept": "String",
+      "coverage": "A",
+      "counts": {
+        "lessons": 1,
+        "lessonsStrong": 1,
+        "examples": 4,
+        "examplesStrong": 2,
+        "references": 3,
+        "interviews": 123,
+        "interviewsStrong": 53,
+        "leetcode": 36,
+        "projects": 0,
+        "versions": 9
+      },
+      "strongLessons": [
+        {
+          "title": "Strings",
+          "url": "/docs/02-learn--08-Strings"
+        }
+      ],
+      "strongExamples": [
+        {
+          "title": "String Concat Benchmark",
+          "url": "/examples/pkg19performance/StringConcatBenchmark",
+          "file": "StringConcatBenchmark.java"
+        },
+        {
+          "title": "core 9 Strings Demo",
+          "url": "/examples/pkg1core/core9StringsDemo",
+          "file": "core9StringsDemo.java"
+        }
+      ],
+      "strongReferences": [],
+      "strongInterviewsSample": [
+        {
+          "title": "Why are Strings immutable?",
+          "url": "/docs/03-interview--01-CoreJava#5-why-are-strings-immutable"
+        },
+        {
+          "title": "`String` vs `StringBuilder` vs `StringBuffer`?",
+          "url": "/docs/03-interview--01-CoreJava#6-string-vs-stringbuilder-vs-stringbuffer"
+        },
+        {
+          "title": "What is the string pool?",
+          "url": "/docs/03-interview--01-CoreJava"
+        },
+        {
+          "title": "`equals` on StringBuilder?",
+          "url": "/docs/03-interview--01-CoreJava"
+        },
+        {
+          "title": "Convert intΓåÆString?",
+          "url": "/docs/03-interview--01-CoreJava"
+        },
+        {
+          "title": "StringΓåÆint?",
+          "url": "/docs/03-interview--01-CoreJava"
+        },
+        {
+          "title": "String formatting?",
+          "url": "/docs/03-interview--01-CoreJava"
+        },
+        {
+          "title": "StringBuilder capacity?",
+          "url": "/docs/03-interview--01-CoreJava"
+        },
+        {
+          "title": "Reverse a string?",
+          "url": "/docs/03-interview--01-CoreJava"
+        },
+        {
+          "title": "synchronized on String/Integer?",
+          "url": "/docs/03-interview--04-Concurrency"
+        },
+        {
+          "title": "Where do string literals live?",
+          "url": "/docs/03-interview--05-JVM"
+        },
+        {
+          "title": "String dedup?",
+          "url": "/docs/03-interview--05-JVM"
+        }
+      ],
+      "strongLeetcodeSample": [
+        {
+          "title": "Valid Palindrome",
+          "url": "/examples/pkg5leetcode/blind75_LC125ValidPalindrome"
+        },
+        {
+          "title": "Valid Parentheses",
+          "url": "/examples/pkg5leetcode/blind75_LC20ValidParentheses"
+        },
+        {
+          "title": "Valid Anagram",
+          "url": "/examples/pkg5leetcode/blind75_LC242ValidAnagram"
+        },
+        {
+          "title": "Encode and Decode Strings",
+          "url": "/examples/pkg5leetcode/blind75_LC271EncodeAndDecodeStrings"
+        },
+        {
+          "title": "Longest Substring Without Repeating Characters",
+          "url": "/examples/pkg5leetcode/blind75_LC3LongestSubstringWithoutRepeating"
+        },
+        {
+          "title": "Longest Repeating Character Replacement",
+          "url": "/examples/pkg5leetcode/blind75_LC424LongestRepeatingCharacterReplacement"
+        },
+        {
+          "title": "Group Anagrams",
+          "url": "/examples/pkg5leetcode/blind75_LC49GroupAnagrams"
+        },
+        {
+          "title": "Longest Palindromic Substring",
+          "url": "/examples/pkg5leetcode/blind75_LC5LongestPalindromicSubstring"
+        },
+        {
+          "title": "Palindromic Substrings",
+          "url": "/examples/pkg5leetcode/blind75_LC647PalindromicSubstrings"
+        },
+        {
+          "title": "Minimum Window Substring",
+          "url": "/examples/pkg5leetcode/blind75_LC76MinimumWindowSubstring"
+        }
+      ],
+      "projects": [],
+      "strongVersionsSample": [
+        {
+          "title": "Strings in switch",
+          "url": "/examples/pkg2versions/versions2Java7Features"
+        },
+        {
+          "title": "Strings in switch",
+          "url": "/versions/java-7#java7-switch"
+        },
+        {
+          "title": "String and file helpers",
+          "url": "/versions/java-11#java11-string"
+        },
+        {
+          "title": "String Templates (Preview)",
+          "url": "/versions/java-21#jep-430"
+        },
+        {
+          "title": "String Templates (Second Preview)",
+          "url": "/versions/java-22#jep-459"
+        }
+      ],
+      "explicitFromPrimaryLesson": {
+        "interview": [
+          {
+            "href": "/docs/03-interview--09-StringsAndPerformance",
+            "title": "Strings & Performance ΓÇö Interview Questions (82+)"
+          }
+        ],
+        "reference": [],
+        "projects": [],
+        "relatedExamples": [
+          {
+            "path": "pkg1core/core9StringsDemo.java",
+            "url": "/examples/pkg1core/core9StringsDemo",
+            "className": "core9StringsDemo",
+            "role": "Core Java"
+          }
+        ]
+      }
+    },
+    {
+      "concept": "Collections",
+      "coverage": "A",
+      "counts": {
+        "lessons": 1,
+        "lessonsStrong": 1,
+        "examples": 3,
+        "examplesStrong": 2,
+        "references": 3,
+        "interviews": 163,
+        "interviewsStrong": 28,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 9
+      },
+      "strongLessons": [
+        {
+          "title": "Collections",
+          "url": "/docs/02-learn--17-Collections"
+        }
+      ],
+      "strongExamples": [
+        {
+          "title": "core 19 Collections Demo",
+          "url": "/examples/pkg1core/core19CollectionsDemo",
+          "file": "core19CollectionsDemo.java"
+        },
+        {
+          "title": "jvm 3 Garbage Collection Demo",
+          "url": "/examples/pkg6jvm/jvm3GarbageCollectionDemo",
+          "file": "jvm3GarbageCollectionDemo.java"
+        }
+      ],
+      "strongReferences": [],
+      "strongInterviewsSample": [
+        {
+          "title": "Autobox in collections?",
+          "url": "/docs/03-interview--01-CoreJava"
+        },
+        {
+          "title": "Immutable collections?",
+          "url": "/docs/03-interview--01-CoreJava"
+        },
+        {
+          "title": "Collections Framework ΓÇö Interview Questions (120+)",
+          "url": "/docs/03-interview--03-Collections"
+        },
+        {
+          "title": "Overview of the Collections hierarchy?",
+          "url": "/docs/03-interview--03-Collections#1-overview-of-the-collections-hierarchy"
+        },
+        {
+          "title": "How to make a collection thread-safe?",
+          "url": "/docs/03-interview--03-Collections#7-how-to-make-a-collection-thread-safe"
+        },
+        {
+          "title": "Comparable vs Comparator (collections context)?",
+          "url": "/docs/03-interview--03-Collections#11-comparable-vs-comparator-collections-context"
+        },
+        {
+          "title": "Is Map a Collection?",
+          "url": "/docs/03-interview--03-Collections"
+        },
+        {
+          "title": "Root interface of collections?",
+          "url": "/docs/03-interview--03-Collections"
+        },
+        {
+          "title": "Collections.emptyList()?",
+          "url": "/docs/03-interview--03-Collections"
+        },
+        {
+          "title": "Collections.singletonList()?",
+          "url": "/docs/03-interview--03-Collections"
+        },
+        {
+          "title": "Stream from collection?",
+          "url": "/docs/03-interview--03-Collections"
+        },
+        {
+          "title": "Why immutable collections?",
+          "url": "/docs/03-interview--03-Collections"
+        }
+      ],
+      "strongLeetcodeSample": [],
+      "projects": [],
+      "strongVersionsSample": [
+        {
+          "title": "Sequenced collections (JEP 431)",
+          "url": "/examples/pkg2versions/versions6Java21Features"
+        },
+        {
+          "title": "Convenience Factory Methods for Collections",
+          "url": "/versions/java-9#jep-269"
+        },
+        {
+          "title": "Abortable Mixed Collections for G1",
+          "url": "/versions/java-12#jep-344"
+        },
+        {
+          "title": "Sequenced Collections",
+          "url": "/versions/java-21#jep-431"
+        }
+      ],
+      "explicitFromPrimaryLesson": {
+        "interview": [
+          {
+            "href": "/docs/03-interview--03-Collections",
+            "title": "Collections Framework ΓÇö Interview Questions (120+)"
+          }
+        ],
+        "reference": [],
+        "projects": [],
+        "relatedExamples": [
+          {
+            "path": "pkg1core/core19CollectionsDemo.java",
+            "url": "/examples/pkg1core/core19CollectionsDemo",
+            "className": "core19CollectionsDemo",
+            "role": "Core Java"
+          },
+          {
+            "path": "pkg1core/core28ComparatorDemo.java",
+            "url": "/examples/pkg1core/core28ComparatorDemo",
+            "className": "core28ComparatorDemo",
+            "role": "Core Java"
+          }
+        ]
+      }
+    },
+    {
+      "concept": "HashMap",
+      "coverage": "B",
+      "counts": {
+        "lessons": 1,
+        "lessonsStrong": 0,
+        "examples": 3,
+        "examplesStrong": 1,
+        "references": 0,
+        "interviews": 22,
+        "interviewsStrong": 18,
+        "leetcode": 14,
+        "projects": 0,
+        "versions": 0
+      },
+      "strongLessons": [
+        {
+          "title": "Collections",
+          "url": "/docs/02-learn--17-Collections"
+        }
+      ],
+      "strongExamples": [
+        {
+          "title": "core 29 Hash Map Demo",
+          "url": "/examples/pkg1core/core29HashMapDemo",
+          "file": "core29HashMapDemo.java"
+        },
+        {
+          "title": "core 19 Collections Demo",
+          "url": "/examples/pkg1core/core19CollectionsDemo",
+          "file": "core19CollectionsDemo.java"
+        },
+        {
+          "title": "datastructures 6 Hash Table Impl",
+          "url": "/examples/pkg3datastructures/datastructures6HashTableImpl",
+          "file": "datastructures6HashTableImpl.java"
+        }
+      ],
+      "strongReferences": [],
+      "strongInterviewsSample": [
+        {
+          "title": "How does HashMap work internally?",
+          "url": "/docs/03-interview--03-Collections#3-how-does-hashmap-work-internally"
+        },
+        {
+          "title": "HashMap vs Hashtable vs ConcurrentHashMap?",
+          "url": "/docs/03-interview--03-Collections#4-hashmap-vs-hashtable-vs-concurrenthashmap"
+        },
+        {
+          "title": "HashMap vs TreeMap vs LinkedHashMap?",
+          "url": "/docs/03-interview--03-Collections#6-hashmap-vs-treemap-vs-linkedhashmap"
+        },
+        {
+          "title": "How does ConcurrentHashMap achieve concurrency?",
+          "url": "/docs/03-interview--03-Collections#12-how-does-concurrenthashmap-achieve-concurrency"
+        },
+        {
+          "title": "HashMap null keys?",
+          "url": "/docs/03-interview--03-Collections"
+        },
+        {
+          "title": "ConcurrentHashMap null?",
+          "url": "/docs/03-interview--03-Collections"
+        },
+        {
+          "title": "IdentityHashMap?",
+          "url": "/docs/03-interview--03-Collections"
+        },
+        {
+          "title": "WeakHashMap?",
+          "url": "/docs/03-interview--03-Collections"
+        },
+        {
+          "title": "HashMap thread-safe alt?",
+          "url": "/docs/03-interview--03-Collections"
+        },
+        {
+          "title": "LinkedHashMap LRU?",
+          "url": "/docs/03-interview--03-Collections"
+        },
+        {
+          "title": "Initial-size a HashMap?",
+          "url": "/docs/03-interview--03-Collections"
+        },
+        {
+          "title": "ConcurrentHashMap internals?",
+          "url": "/docs/03-interview--04-Concurrency#14-concurrenthashmap-internals"
+        }
+      ],
+      "strongLeetcodeSample": [
+        {
+          "title": "Two Sum",
+          "url": "/examples/pkg5leetcode/blind75_LC1TwoSum",
+          "file": "blind75_LC1TwoSum.java"
+        },
+        {
+          "title": "Group Anagrams",
+          "url": "/examples/pkg5leetcode/blind75_LC49GroupAnagrams",
+          "file": "blind75_LC49GroupAnagrams.java"
+        },
+        {
+          "title": "Subarray Sum Equals K",
+          "url": "/examples/pkg5leetcode/interview150_LC560SubarraySumEqualsK",
+          "file": "interview150_LC560SubarraySumEqualsK.java"
+        },
+        {
+          "title": "Isomorphic Strings",
+          "url": "/examples/pkg5leetcode/interview150_LC205IsomorphicStrings",
+          "file": "interview150_LC205IsomorphicStrings.java"
+        },
+        {
+          "title": "Contains Duplicate II",
+          "url": "/examples/pkg5leetcode/interview150_LC219ContainsDuplicateII",
+          "file": "interview150_LC219ContainsDuplicateII.java"
+        },
+        {
+          "title": "Unique Number of Occurrences",
+          "url": "/examples/pkg5leetcode/official75_LC1207UniqueNumberOfOccurrences",
+          "file": "official75_LC1207UniqueNumberOfOccurrences.java"
+        }
+      ],
+      "projects": [],
+      "strongVersionsSample": [],
+      "explicitFromPrimaryLesson": {
+        "interview": [
+          {
+            "href": "/docs/03-interview--03-Collections#3-how-does-hashmap-work-internally",
+            "title": "How does HashMap work internally?"
+          },
+          {
+            "href": "/docs/03-interview--03-Collections#4-hashmap-vs-hashtable-vs-concurrenthashmap",
+            "title": "HashMap vs Hashtable vs ConcurrentHashMap?"
+          },
+          {
+            "href": "/docs/03-interview--03-Collections#6-hashmap-vs-treemap-vs-linkedhashmap",
+            "title": "HashMap vs TreeMap vs LinkedHashMap?"
+          },
+          {
+            "href": "/docs/03-interview--03-Collections#9-what-is-the-load-factor-and-capacity",
+            "title": "What is the load factor and capacity?"
+          },
+          {
+            "href": "/docs/03-interview--03-Collections#10-why-must-map-keys-be-immutable-have-stable-hashcode",
+            "title": "Why must map keys be immutable / have stable hashCode?"
+          }
+        ],
+        "reference": [],
+        "projects": [],
+        "relatedExamples": [
+          {
+            "path": "pkg1core/core29HashMapDemo.java",
+            "url": "/examples/pkg1core/core29HashMapDemo",
+            "className": "core29HashMapDemo",
+            "role": "Core Java"
+          },
+          {
+            "path": "pkg1core/core19CollectionsDemo.java",
+            "url": "/examples/pkg1core/core19CollectionsDemo",
+            "className": "core19CollectionsDemo",
+            "role": "Core Java"
+          },
+          {
+            "path": "pkg3datastructures/datastructures6HashTableImpl.java",
+            "url": "/examples/pkg3datastructures/datastructures6HashTableImpl",
+            "className": "datastructures6HashTableImpl",
+            "role": "Data structures"
+          }
+        ]
+      }
+    },
+    {
+      "concept": "ArrayList",
+      "coverage": "C",
+      "counts": {
+        "lessons": 1,
+        "lessonsStrong": 0,
+        "examples": 1,
+        "examplesStrong": 0,
+        "references": 0,
+        "interviews": 17,
+        "interviewsStrong": 14,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      },
+      "strongLessons": [],
+      "strongExamples": [],
+      "strongReferences": [],
+      "strongInterviewsSample": [
+        {
+          "title": "Difference array vs ArrayList?",
+          "url": "/docs/03-interview--01-CoreJava"
+        },
+        {
+          "title": "ArrayList vs LinkedList?",
+          "url": "/docs/03-interview--03-Collections#2-arraylist-vs-linkedlist"
+        },
+        {
+          "title": "What is CopyOnWriteArrayList good for?",
+          "url": "/docs/03-interview--03-Collections#13-what-is-copyonwritearraylist-good-for"
+        },
+        {
+          "title": "Default ArrayList capacity?",
+          "url": "/docs/03-interview--03-Collections"
+        },
+        {
+          "title": "ArrayList growth?",
+          "url": "/docs/03-interview--03-Collections"
+        },
+        {
+          "title": "ArrayList get complexity?",
+          "url": "/docs/03-interview--03-Collections"
+        },
+        {
+          "title": "ArrayList add at index?",
+          "url": "/docs/03-interview--03-Collections"
+        },
+        {
+          "title": "Convert arrayΓåÆlist?",
+          "url": "/docs/03-interview--03-Collections"
+        },
+        {
+          "title": "Shrink ArrayList?",
+          "url": "/docs/03-interview--03-Collections"
+        },
+        {
+          "title": "Why ArrayList > Vector?",
+          "url": "/docs/03-interview--03-Collections"
+        },
+        {
+          "title": "Memory: ArrayList vs LinkedList?",
+          "url": "/docs/03-interview--03-Collections"
+        },
+        {
+          "title": "CopyOnWriteArrayList?",
+          "url": "/docs/03-interview--04-Concurrency"
+        }
+      ],
+      "strongLeetcodeSample": [],
+      "projects": [],
+      "strongVersionsSample": [],
+      "explicitFromPrimaryLesson": {
+        "interview": [],
+        "reference": [],
+        "projects": [],
+        "relatedExamples": []
+      }
+    },
+    {
+      "concept": "Exceptions",
+      "coverage": "A",
+      "counts": {
+        "lessons": 1,
+        "lessonsStrong": 1,
+        "examples": 1,
+        "examplesStrong": 1,
+        "references": 1,
+        "interviews": 112,
+        "interviewsStrong": 53,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 4
+      },
+      "strongLessons": [
+        {
+          "title": "Exceptions",
+          "url": "/docs/02-learn--16-Exceptions"
+        }
+      ],
+      "strongExamples": [
+        {
+          "title": "core 18 Exceptions Demo",
+          "url": "/examples/pkg1core/core18ExceptionsDemo",
+          "file": "core18ExceptionsDemo.java"
+        }
+      ],
+      "strongReferences": [],
+      "strongInterviewsSample": [
+        {
+          "title": "Checked vs unchecked exceptions?",
+          "url": "/docs/03-interview--01-CoreJava#8-checked-vs-unchecked-exceptions"
+        },
+        {
+          "title": "Can overriding method throw broader checked exceptions?",
+          "url": "/docs/03-interview--01-CoreJava"
+        },
+        {
+          "title": "Suppressed exceptions?",
+          "url": "/docs/03-interview--01-CoreJava"
+        },
+        {
+          "title": "Custom exception?",
+          "url": "/docs/03-interview--01-CoreJava"
+        },
+        {
+          "title": "Exception chaining?",
+          "url": "/docs/03-interview--01-CoreJava"
+        },
+        {
+          "title": "Difference Error vs Exception?",
+          "url": "/docs/03-interview--01-CoreJava"
+        },
+        {
+          "title": "ClassCastException?",
+          "url": "/docs/03-interview--01-CoreJava"
+        },
+        {
+          "title": "InterruptedException meaning?",
+          "url": "/docs/03-interview--04-Concurrency"
+        },
+        {
+          "title": "handle InterruptedException?",
+          "url": "/docs/03-interview--04-Concurrency"
+        },
+        {
+          "title": "ClassNotFoundException?",
+          "url": "/docs/03-interview--05-JVM"
+        },
+        {
+          "title": "Exceptions ΓÇö Interview Questions (77+)",
+          "url": "/docs/03-interview--07-Exceptions"
+        },
+        {
+          "title": "Exception hierarchy in Java?",
+          "url": "/docs/03-interview--07-Exceptions#1-exception-hierarchy-in-java"
+        }
+      ],
+      "strongLeetcodeSample": [],
+      "projects": [],
+      "strongVersionsSample": [
+        {
+          "title": "Helpful NullPointerExceptions",
+          "url": "/versions/java-14#jep-358"
+        }
+      ],
+      "explicitFromPrimaryLesson": {
+        "interview": [
+          {
+            "href": "/docs/03-interview--07-Exceptions",
+            "title": "Exceptions ΓÇö Interview Questions (77+)"
+          }
+        ],
+        "reference": [],
+        "projects": [],
+        "relatedExamples": [
+          {
+            "path": "pkg1core/core18ExceptionsDemo.java",
+            "url": "/examples/pkg1core/core18ExceptionsDemo",
+            "className": "core18ExceptionsDemo",
+            "role": "Core Java"
+          }
+        ]
+      }
+    },
+    {
+      "concept": "Generics",
+      "coverage": "A",
+      "counts": {
+        "lessons": 2,
+        "lessonsStrong": 1,
+        "examples": 2,
+        "examplesStrong": 1,
+        "references": 1,
+        "interviews": 76,
+        "interviewsStrong": 32,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 2
+      },
+      "strongLessons": [
+        {
+          "title": "Generics",
+          "url": "/docs/02-learn--18-Generics"
+        }
+      ],
+      "strongExamples": [
+        {
+          "title": "core 20 Generics Demo",
+          "url": "/examples/pkg1core/core20GenericsDemo",
+          "file": "core20GenericsDemo.java"
+        }
+      ],
+      "strongReferences": [],
+      "strongInterviewsSample": [
+        {
+          "title": "What is generics erasure?",
+          "url": "/docs/03-interview--01-CoreJava"
+        },
+        {
+          "title": "Generics ΓÇö Interview Questions (60+)",
+          "url": "/docs/03-interview--08-Generics"
+        },
+        {
+          "title": "Why generics?",
+          "url": "/docs/03-interview--08-Generics#1-why-generics"
+        },
+        {
+          "title": "Why can't you create a generic array?",
+          "url": "/docs/03-interview--08-Generics#6-why-cant-you-create-a-generic-array"
+        },
+        {
+          "title": "What is a generic method?",
+          "url": "/docs/03-interview--08-Generics#7-what-is-a-generic-method"
+        },
+        {
+          "title": "Generic class syntax?",
+          "url": "/docs/03-interview--08-Generics"
+        },
+        {
+          "title": "Generic interface?",
+          "url": "/docs/03-interview--08-Generics"
+        },
+        {
+          "title": "Generic method syntax?",
+          "url": "/docs/03-interview--08-Generics"
+        },
+        {
+          "title": "Var with generics?",
+          "url": "/docs/03-interview--08-Generics"
+        },
+        {
+          "title": "instanceof with generics?",
+          "url": "/docs/03-interview--08-Generics"
+        },
+        {
+          "title": "Cast to generic warning?",
+          "url": "/docs/03-interview--08-Generics"
+        },
+        {
+          "title": "Generic array creation?",
+          "url": "/docs/03-interview--08-Generics"
+        }
+      ],
+      "strongLeetcodeSample": [],
+      "projects": [],
+      "strongVersionsSample": [
+        {
+          "title": "Generics",
+          "url": "/examples/pkg2versions/versions1Java5Features"
+        }
+      ],
+      "explicitFromPrimaryLesson": {
+        "interview": [
+          {
+            "href": "/docs/03-interview--08-Generics",
+            "title": "Generics ΓÇö Interview Questions (60+)"
+          }
+        ],
+        "reference": [],
+        "projects": [],
+        "relatedExamples": [
+          {
+            "path": "pkg1core/core20GenericsDemo.java",
+            "url": "/examples/pkg1core/core20GenericsDemo",
+            "className": "core20GenericsDemo",
+            "role": "Core Java"
+          }
+        ]
+      }
+    },
+    {
+      "concept": "Streams",
+      "coverage": "A",
+      "counts": {
+        "lessons": 4,
+        "lessonsStrong": 1,
+        "examples": 4,
+        "examplesStrong": 3,
+        "references": 3,
+        "interviews": 150,
+        "interviewsStrong": 43,
+        "leetcode": 1,
+        "projects": 0,
+        "versions": 13
+      },
+      "strongLessons": [
+        {
+          "title": "Streams & Optional",
+          "url": "/docs/02-learn--20-StreamsAndOptional"
+        }
+      ],
+      "strongExamples": [
+        {
+          "title": "core 22 Streams Demo",
+          "url": "/examples/pkg1core/core22StreamsDemo",
+          "file": "core22StreamsDemo.java"
+        },
+        {
+          "title": "io 2 Byte Streams",
+          "url": "/examples/pkg9io/io2ByteStreams",
+          "file": "io2ByteStreams.java"
+        },
+        {
+          "title": "io 3 Character Streams",
+          "url": "/examples/pkg9io/io3CharacterStreams",
+          "file": "io3CharacterStreams.java"
+        }
+      ],
+      "strongReferences": [],
+      "strongInterviewsSample": [
+        {
+          "title": "Stream from collection?",
+          "url": "/docs/03-interview--03-Collections"
+        },
+        {
+          "title": "Parallel stream pool?",
+          "url": "/docs/03-interview--03-Collections"
+        },
+        {
+          "title": "parallelStream pool?",
+          "url": "/docs/03-interview--04-Concurrency"
+        },
+        {
+          "title": "Functional Programming & Streams ΓÇö Interview Questions (100+)",
+          "url": "/docs/03-interview--06-Streams"
+        },
+        {
+          "title": "What is a Stream and how does it differ from a Collection?",
+          "url": "/docs/03-interview--06-Streams#1-what-is-a-stream-and-how-does-it-differ-from-a-collection"
+        },
+        {
+          "title": "What does \"lazy evaluation\" mean for streams?",
+          "url": "/docs/03-interview--06-Streams#3-what-does-lazy-evaluation-mean-for-streams"
+        },
+        {
+          "title": "When should you use parallel streams?",
+          "url": "/docs/03-interview--06-Streams#7-when-should-you-use-parallel-streams"
+        },
+        {
+          "title": "Why are streams single-use?",
+          "url": "/docs/03-interview--06-Streams#11-why-are-streams-single-use"
+        },
+        {
+          "title": "How do you avoid side effects in streams?",
+          "url": "/docs/03-interview--06-Streams#12-how-do-you-avoid-side-effects-in-streams"
+        },
+        {
+          "title": "What are primitive streams and why use them?",
+          "url": "/docs/03-interview--06-Streams#14-what-are-primitive-streams-and-why-use-them"
+        },
+        {
+          "title": "Create stream from list?",
+          "url": "/docs/03-interview--06-Streams"
+        },
+        {
+          "title": "Infinite stream?",
+          "url": "/docs/03-interview--06-Streams"
+        }
+      ],
+      "strongLeetcodeSample": [
+        {
+          "title": "Find Median from Data Stream",
+          "url": "/examples/pkg5leetcode/blind75_LC295FindMedianFromDataStream"
+        }
+      ],
+      "projects": [],
+      "strongVersionsSample": [
+        {
+          "title": "Streams API",
+          "url": "/examples/pkg2versions/versions3Java8Features"
+        },
+        {
+          "title": "Stream API",
+          "url": "/versions/java-8#java8-streams"
+        },
+        {
+          "title": "Stream additions",
+          "url": "/versions/java-9#java9-streams"
+        },
+        {
+          "title": "Stream.toList()",
+          "url": "/versions/java-16#java16-tolist"
+        },
+        {
+          "title": "Stream Gatherers (Preview)",
+          "url": "/versions/java-22#jep-461"
+        },
+        {
+          "title": "Stream Gatherers (Second Preview)",
+          "url": "/versions/java-23#jep-473"
+        },
+        {
+          "title": "Stream Gatherers",
+          "url": "/versions/java-24#jep-485"
+        }
+      ],
+      "explicitFromPrimaryLesson": {
+        "interview": [
+          {
+            "href": "/docs/03-interview--06-Streams",
+            "title": "Functional Programming & Streams ΓÇö Interview Questions (100+)"
+          }
+        ],
+        "reference": [],
+        "projects": [],
+        "relatedExamples": [
+          {
+            "path": "pkg1core/core22StreamsDemo.java",
+            "url": "/examples/pkg1core/core22StreamsDemo",
+            "className": "core22StreamsDemo",
+            "role": "Core Java"
+          },
+          {
+            "path": "pkg1core/core23OptionalDemo.java",
+            "url": "/examples/pkg1core/core23OptionalDemo",
+            "className": "core23OptionalDemo",
+            "role": "Core Java"
+          }
+        ]
+      }
+    },
+    {
+      "concept": "Concurrency",
+      "coverage": "A",
+      "counts": {
+        "lessons": 2,
+        "lessonsStrong": 1,
+        "examples": 15,
+        "examplesStrong": 15,
+        "references": 3,
+        "interviews": 174,
+        "interviewsStrong": 7,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 11
+      },
+      "strongLessons": [
+        {
+          "title": "Concurrency",
+          "url": "/docs/02-learn--26-Concurrency"
+        }
+      ],
+      "strongExamples": [
+        {
+          "title": "advconcurrency 1 Count Down Latch",
+          "url": "/examples/pkg16advconcurrency/advconcurrency1CountDownLatch",
+          "file": "advconcurrency1CountDownLatch.java"
+        },
+        {
+          "title": "advconcurrency 2 Cyclic Barrier",
+          "url": "/examples/pkg16advconcurrency/advconcurrency2CyclicBarrier",
+          "file": "advconcurrency2CyclicBarrier.java"
+        },
+        {
+          "title": "advconcurrency 3 Semaphore",
+          "url": "/examples/pkg16advconcurrency/advconcurrency3Semaphore",
+          "file": "advconcurrency3Semaphore.java"
+        },
+        {
+          "title": "advconcurrency 4 Phaser",
+          "url": "/examples/pkg16advconcurrency/advconcurrency4Phaser",
+          "file": "advconcurrency4Phaser.java"
+        },
+        {
+          "title": "advconcurrency 5 Exchanger",
+          "url": "/examples/pkg16advconcurrency/advconcurrency5Exchanger",
+          "file": "advconcurrency5Exchanger.java"
+        },
+        {
+          "title": "advconcurrency 6 Java Memory Model",
+          "url": "/examples/pkg16advconcurrency/advconcurrency6JavaMemoryModel",
+          "file": "advconcurrency6JavaMemoryModel.java"
+        },
+        {
+          "title": "advconcurrency 7 Structured Concurrency",
+          "url": "/examples/pkg16advconcurrency/advconcurrency7StructuredConcurrency",
+          "file": "advconcurrency7StructuredConcurrency.java"
+        },
+        {
+          "title": "concurrency 1 Thread Basics",
+          "url": "/examples/pkg7concurrency/concurrency1ThreadBasics",
+          "file": "concurrency1ThreadBasics.java"
+        },
+        {
+          "title": "concurrency 2 Synchronization Demo",
+          "url": "/examples/pkg7concurrency/concurrency2SynchronizationDemo",
+          "file": "concurrency2SynchronizationDemo.java"
+        },
+        {
+          "title": "concurrency 3 Executors Demo",
+          "url": "/examples/pkg7concurrency/concurrency3ExecutorsDemo",
+          "file": "concurrency3ExecutorsDemo.java"
+        },
+        {
+          "title": "concurrency 4 Completable Future Demo",
+          "url": "/examples/pkg7concurrency/concurrency4CompletableFutureDemo",
+          "file": "concurrency4CompletableFutureDemo.java"
+        },
+        {
+          "title": "concurrency 5 Fork Join Demo",
+          "url": "/examples/pkg7concurrency/concurrency5ForkJoinDemo",
+          "file": "concurrency5ForkJoinDemo.java"
+        }
+      ],
+      "strongReferences": [
+        {
+          "title": "Java Memory Model (pkg16advconcurrency)",
+          "url": "/docs/04-reference--11-MemoryModel"
+        }
+      ],
+      "strongInterviewsSample": [
+        {
+          "title": "How does ConcurrentHashMap achieve concurrency?",
+          "url": "/docs/03-interview--03-Collections#12-how-does-concurrenthashmap-achieve-concurrency"
+        },
+        {
+          "title": "Concurrency & Multithreading ΓÇö Interview Questions (150+)",
+          "url": "/docs/03-interview--04-Concurrency"
+        },
+        {
+          "title": "immutable + concurrency?",
+          "url": "/docs/03-interview--04-Concurrency"
+        },
+        {
+          "title": "structured concurrency (preview)?",
+          "url": "/docs/03-interview--04-Concurrency"
+        },
+        {
+          "title": "concurrency testing tools?",
+          "url": "/docs/03-interview--04-Concurrency"
+        },
+        {
+          "title": "structured concurrency preview?",
+          "url": "/docs/03-interview--10-Java9To21Features"
+        },
+        {
+          "title": "Optimistic concurrency?",
+          "url": "/docs/03-interview--18-SystemDesign"
+        }
+      ],
+      "strongLeetcodeSample": [],
+      "projects": [],
+      "strongVersionsSample": [
+        {
+          "title": "More Concurrency Updates",
+          "url": "/versions/java-9#jep-266"
+        },
+        {
+          "title": "Structured Concurrency (Incubator)",
+          "url": "/versions/java-19#jep-428"
+        },
+        {
+          "title": "Structured Concurrency (Second Incubator)",
+          "url": "/versions/java-20#jep-437"
+        },
+        {
+          "title": "Java 21",
+          "url": "/versions/java-21"
+        },
+        {
+          "title": "Structured Concurrency (Preview)",
+          "url": "/versions/java-21#jep-453"
+        },
+        {
+          "title": "Structured Concurrency (Second Preview)",
+          "url": "/versions/java-22#jep-462"
+        },
+        {
+          "title": "Structured Concurrency (Third Preview)",
+          "url": "/versions/java-23#jep-480"
+        },
+        {
+          "title": "Structured Concurrency (Fourth Preview)",
+          "url": "/versions/java-24#jep-499"
+        },
+        {
+          "title": "Java 25",
+          "url": "/versions/java-25"
+        },
+        {
+          "title": "Structured Concurrency (Fifth Preview)",
+          "url": "/versions/java-25#jep-505"
+        }
+      ],
+      "explicitFromPrimaryLesson": {
+        "interview": [
+          {
+            "href": "/docs/03-interview--04-Concurrency",
+            "title": "Concurrency & Multithreading ΓÇö Interview Questions (150+)"
+          }
+        ],
+        "reference": [],
+        "projects": [],
+        "relatedExamples": [
+          {
+            "path": "pkg7concurrency/concurrency1ThreadBasics.java",
+            "url": "/examples/pkg7concurrency/concurrency1ThreadBasics",
+            "className": "concurrency1ThreadBasics",
+            "role": "Concurrency"
+          }
+        ]
+      }
+    },
+    {
+      "concept": "Executors",
+      "coverage": "B",
+      "counts": {
+        "lessons": 0,
+        "lessonsStrong": 0,
+        "examples": 1,
+        "examplesStrong": 1,
+        "references": 0,
+        "interviews": 7,
+        "interviewsStrong": 5,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 0
+      },
+      "strongLessons": [],
+      "strongExamples": [
+        {
+          "title": "concurrency 3 Executors Demo",
+          "url": "/examples/pkg7concurrency/concurrency3ExecutorsDemo",
+          "file": "concurrency3ExecutorsDemo.java"
+        }
+      ],
+      "strongReferences": [],
+      "strongInterviewsSample": [
+        {
+          "title": "ExecutorService benefits over raw threads?",
+          "url": "/docs/03-interview--04-Concurrency#8-executorservice-benefits-over-raw-threads"
+        },
+        {
+          "title": "Executors.newFixedThreadPool?",
+          "url": "/docs/03-interview--04-Concurrency"
+        },
+        {
+          "title": "newSingleThreadExecutor?",
+          "url": "/docs/03-interview--04-Concurrency"
+        },
+        {
+          "title": "newVirtualThreadPerTaskExecutor?",
+          "url": "/docs/03-interview--04-Concurrency"
+        },
+        {
+          "title": "ThreadPoolExecutor core params?",
+          "url": "/docs/03-interview--04-Concurrency"
+        }
+      ],
+      "strongLeetcodeSample": [],
+      "projects": [],
+      "strongVersionsSample": [],
+      "explicitFromPrimaryLesson": {
+        "interview": [],
+        "reference": [],
+        "projects": [],
+        "relatedExamples": []
+      }
+    },
+    {
+      "concept": "CompletableFuture",
+      "coverage": "B",
+      "counts": {
+        "lessons": 0,
+        "lessonsStrong": 0,
+        "examples": 1,
+        "examplesStrong": 1,
+        "references": 0,
+        "interviews": 5,
+        "interviewsStrong": 5,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 2
+      },
+      "strongLessons": [],
+      "strongExamples": [
+        {
+          "title": "concurrency 4 Completable Future Demo",
+          "url": "/examples/pkg7concurrency/concurrency4CompletableFutureDemo",
+          "file": "concurrency4CompletableFutureDemo.java"
+        }
+      ],
+      "strongReferences": [],
+      "strongInterviewsSample": [
+        {
+          "title": "What is CompletableFuture?",
+          "url": "/docs/03-interview--04-Concurrency#10-what-is-completablefuture"
+        },
+        {
+          "title": "CompletableFuture default pool?",
+          "url": "/docs/03-interview--04-Concurrency"
+        },
+        {
+          "title": "CompletableFuture vs virtual threads?",
+          "url": "/docs/03-interview--04-Concurrency"
+        },
+        {
+          "title": "when to use CompletableFuture?",
+          "url": "/docs/03-interview--04-Concurrency"
+        },
+        {
+          "title": "CompletableFuture supplyAsync IO?",
+          "url": "/docs/03-interview--11-IOAndSerialization"
+        }
+      ],
+      "strongLeetcodeSample": [],
+      "projects": [],
+      "strongVersionsSample": [
+        {
+          "title": "CompletableFuture",
+          "url": "/versions/java-8#java8-cfe"
+        }
+      ],
+      "explicitFromPrimaryLesson": {
+        "interview": [],
+        "reference": [],
+        "projects": [],
+        "relatedExamples": []
+      }
+    },
+    {
+      "concept": "Virtual Threads",
+      "coverage": "A",
+      "counts": {
+        "lessons": 1,
+        "lessonsStrong": 0,
+        "examples": 1,
+        "examplesStrong": 1,
+        "references": 0,
+        "interviews": 17,
+        "interviewsStrong": 10,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 11
+      },
+      "strongLessons": [],
+      "strongExamples": [
+        {
+          "title": "concurrency 6 Virtual Threads Demo",
+          "url": "/examples/pkg7concurrency/concurrency6VirtualThreadsDemo",
+          "file": "concurrency6VirtualThreadsDemo.java"
+        }
+      ],
+      "strongReferences": [],
+      "strongInterviewsSample": [
+        {
+          "title": "What are virtual threads (Java 21)?",
+          "url": "/docs/03-interview--04-Concurrency#11-what-are-virtual-threads-java-21"
+        },
+        {
+          "title": "newVirtualThreadPerTaskExecutor?",
+          "url": "/docs/03-interview--04-Concurrency"
+        },
+        {
+          "title": "virtual thread carrier?",
+          "url": "/docs/03-interview--04-Concurrency"
+        },
+        {
+          "title": "virtual thread for CPU work?",
+          "url": "/docs/03-interview--04-Concurrency"
+        },
+        {
+          "title": "CompletableFuture vs virtual threads?",
+          "url": "/docs/03-interview--04-Concurrency"
+        },
+        {
+          "title": "when to use virtual threads?",
+          "url": "/docs/03-interview--04-Concurrency"
+        },
+        {
+          "title": "Java 21 ΓÇö virtual threads?",
+          "url": "/docs/03-interview--10-Java9To21Features#12-java-21-virtual-threads"
+        },
+        {
+          "title": "virtual thread carrier?",
+          "url": "/docs/03-interview--10-Java9To21Features"
+        },
+        {
+          "title": "pin virtual thread?",
+          "url": "/docs/03-interview--10-Java9To21Features"
+        },
+        {
+          "title": "Virtual threads Boot 3.2+?",
+          "url": "/docs/03-interview--15-SpringBoot"
+        }
+      ],
+      "strongLeetcodeSample": [],
+      "projects": [],
+      "strongVersionsSample": [
+        {
+          "title": "Virtual Threads (JEP 444)",
+          "url": "/examples/pkg2versions/versions6Java21Features"
+        },
+        {
+          "title": "Virtual Threads (Preview)",
+          "url": "/versions/java-19#jep-425"
+        },
+        {
+          "title": "Virtual Threads (Second Preview)",
+          "url": "/versions/java-20#jep-436"
+        },
+        {
+          "title": "Java 21",
+          "url": "/versions/java-21"
+        },
+        {
+          "title": "Virtual Threads",
+          "url": "/versions/java-21#jep-444"
+        },
+        {
+          "title": "Synchronize Virtual Threads without Pinning",
+          "url": "/versions/java-24#jep-491"
+        }
+      ],
+      "explicitFromPrimaryLesson": {
+        "interview": [],
+        "reference": [],
+        "projects": [],
+        "relatedExamples": []
+      }
+    },
+    {
+      "concept": "JVM",
+      "coverage": "A",
+      "counts": {
+        "lessons": 3,
+        "lessonsStrong": 1,
+        "examples": 5,
+        "examplesStrong": 4,
+        "references": 3,
+        "interviews": 141,
+        "interviewsStrong": 4,
+        "leetcode": 0,
+        "projects": 0,
+        "versions": 42
+      },
+      "strongLessons": [
+        {
+          "title": "JVM & Memory",
+          "url": "/docs/02-learn--25-JVMAndMemory"
+        }
+      ],
+      "strongExamples": [
+        {
+          "title": "performance 2 Jvm Flags Guide",
+          "url": "/examples/pkg19performance/performance2JvmFlagsGuide",
+          "file": "performance2JvmFlagsGuide.java"
+        },
+        {
+          "title": "jvm 1 Class Loading Demo",
+          "url": "/examples/pkg6jvm/jvm1ClassLoadingDemo",
+          "file": "jvm1ClassLoadingDemo.java"
+        },
+        {
+          "title": "jvm 2 Memory Areas Demo",
+          "url": "/examples/pkg6jvm/jvm2MemoryAreasDemo",
+          "file": "jvm2MemoryAreasDemo.java"
+        },
+        {
+          "title": "jvm 3 Garbage Collection Demo",
+          "url": "/examples/pkg6jvm/jvm3GarbageCollectionDemo",
+          "file": "jvm3GarbageCollectionDemo.java"
+        }
+      ],
+      "strongReferences": [
+        {
+          "title": "JVM Internals",
+          "url": "/docs/04-reference--02-JVMInternals"
+        }
+      ],
+      "strongInterviewsSample": [
+        {
+          "title": "What is the difference between JDK, JRE, and JVM?",
+          "url": "/docs/03-interview--01-CoreJava#1-what-is-the-difference-between-jdk-jre-and-jvm"
+        },
+        {
+          "title": "JVM Internals & GC ΓÇö Interview Questions (120+)",
+          "url": "/docs/03-interview--05-JVM"
+        },
+        {
+          "title": "What are the JVM runtime data areas?",
+          "url": "/docs/03-interview--05-JVM#1-what-are-the-jvm-runtime-data-areas"
+        },
+        {
+          "title": "Common JVM tuning flags?",
+          "url": "/docs/03-interview--05-JVM#15-common-jvm-tuning-flags"
+        }
+      ],
+      "strongLeetcodeSample": [],
+      "projects": [],
+      "strongVersionsSample": [
+        {
+          "title": "Runtime and performance work",
+          "url": "/versions/java-6#java6-runtime"
+        },
+        {
+          "title": "invokedynamic",
+          "url": "/versions/java-7#java7-indy"
+        },
+        {
+          "title": "Metaspace",
+          "url": "/versions/java-8#java8-metaspace"
+        },
+        {
+          "title": "Make G1 the Default Garbage Collector",
+          "url": "/versions/java-9#jep-248"
+        },
+        {
+          "title": "Parallel Full GC for G1",
+          "url": "/versions/java-10#jep-307"
+        },
+        {
+          "title": "Application Class-Data Sharing",
+          "url": "/versions/java-10#jep-310"
+        },
+        {
+          "title": "Experimental Java-Based JIT Compiler",
+          "url": "/versions/java-10#jep-317"
+        },
+        {
+          "title": "Flight Recorder",
+          "url": "/versions/java-11#jep-328"
+        },
+        {
+          "title": "ZGC (Experimental)",
+          "url": "/versions/java-11#jep-333"
+        },
+        {
+          "title": "Shenandoah: A Low-Pause-Time Garbage Collector (Experimental)",
+          "url": "/versions/java-12#jep-189"
+        }
+      ],
+      "explicitFromPrimaryLesson": {
+        "interview": [
+          {
+            "href": "/docs/03-interview--05-JVM",
+            "title": "JVM Internals & GC ΓÇö Interview Questions (120+)"
+          }
+        ],
+        "reference": [
+          {
+            "href": "/docs/04-reference--02-JVMInternals",
+            "title": "JVM Internals"
+          }
+        ],
+        "projects": [],
+        "relatedExamples": [
+          {
+            "path": "pkg6jvm/jvm1ClassLoadingDemo.java",
+            "url": "/examples/pkg6jvm/jvm1ClassLoadingDemo",
+            "className": "jvm1ClassLoadingDemo",
+            "role": "JVM"
+          }
+        ]
+      }
+    },
+    {
+      "concept": "Spring Boot",
+      "coverage": "B",
+      "counts": {
+        "lessons": 1,
+        "lessonsStrong": 1,
+        "examples": 0,
+        "examplesStrong": 0,
+        "references": 1,
+        "interviews": 93,
+        "interviewsStrong": 3,
+        "leetcode": 0,
+        "projects": 1,
+        "versions": 0
+      },
+      "strongLessons": [
+        {
+          "title": "Spring Boot Intro",
+          "url": "/docs/02-learn--40-SpringBootIntro"
+        }
+      ],
+      "strongExamples": [],
+      "strongReferences": [],
+      "strongInterviewsSample": [
+        {
+          "title": "Spring & Spring Boot ΓÇö Interview Questions (92+)",
+          "url": "/docs/03-interview--15-SpringBoot"
+        },
+        {
+          "title": "Spring Boot auto-configuration?",
+          "url": "/docs/03-interview--15-SpringBoot#7-spring-boot-auto-configuration"
+        },
+        {
+          "title": "Spring Test @SpringBootTest?",
+          "url": "/docs/03-interview--15-SpringBoot"
+        }
+      ],
+      "strongLeetcodeSample": [],
+      "projects": [
+        {
+          "title": "Notes API (Spring Boot + H2)",
+          "url": "/projects#04-notes-api"
+        }
+      ],
+      "strongVersionsSample": [],
+      "explicitFromPrimaryLesson": {
+        "interview": [
+          {
+            "href": "/docs/03-interview--15-SpringBoot",
+            "title": "Spring & Spring Boot ΓÇö Interview Questions (92+)"
+          }
+        ],
+        "reference": [],
+        "projects": [
+          {
+            "href": "/projects#04-notes-api",
+            "title": "Notes API (Spring Boot + H2)"
+          }
+        ],
+        "relatedExamples": []
+      }
+    },
+    {
+      "concept": "REST API",
+      "coverage": "B",
+      "counts": {
+        "lessons": 1,
+        "lessonsStrong": 1,
+        "examples": 5,
+        "examplesStrong": 5,
+        "references": 1,
+        "interviews": 0,
+        "interviewsStrong": 0,
+        "leetcode": 0,
+        "projects": 1,
+        "versions": 0
+      },
+      "strongLessons": [
+        {
+          "title": "REST APIs",
+          "url": "/docs/02-learn--31-RestAPIs"
+        }
+      ],
+      "strongExamples": [
+        {
+          "title": "restapi 1 Rest Concepts",
+          "url": "/examples/pkg12restapi/restapi1RestConcepts",
+          "file": "restapi1RestConcepts.java"
+        },
+        {
+          "title": "restapi 2 Http Server Demo",
+          "url": "/examples/pkg12restapi/restapi2HttpServerDemo",
+          "file": "restapi2HttpServerDemo.java"
+        },
+        {
+          "title": "restapi 3 Rest Crud Api",
+          "url": "/examples/pkg12restapi/restapi3RestCrudApi",
+          "file": "restapi3RestCrudApi.java"
+        },
+        {
+          "title": "restapi 4 Json Handling",
+          "url": "/examples/pkg12restapi/restapi4JsonHandling",
+          "file": "restapi4JsonHandling.java"
+        },
+        {
+          "title": "restapi 5 Http Client Consume",
+          "url": "/examples/pkg12restapi/restapi5HttpClientConsume",
+          "file": "restapi5HttpClientConsume.java"
+        }
+      ],
+      "strongReferences": [
+        {
+          "title": "REST APIs (pkg12restapi)",
+          "url": "/docs/04-reference--07-RestApis"
+        }
+      ],
+      "strongInterviewsSample": [],
+      "strongLeetcodeSample": [],
+      "projects": [
+        {
+          "title": "Todo REST (JDK HttpServer)",
+          "url": "/projects#03-todo-rest"
+        }
+      ],
+      "strongVersionsSample": [],
+      "explicitFromPrimaryLesson": {
+        "interview": [
+          {
+            "href": "/docs/03-interview--15-SpringBoot",
+            "title": "Spring & Spring Boot ΓÇö Interview Questions (92+)"
+          }
+        ],
+        "reference": [
+          {
+            "href": "/docs/04-reference--07-RestApis",
+            "title": "REST APIs (pkg12restapi)"
+          }
+        ],
+        "projects": [
+          {
+            "href": "/projects#03-todo-rest",
+            "title": "Todo REST (JDK HttpServer)"
+          }
+        ],
+        "relatedExamples": [
+          {
+            "path": "pkg12restapi/restapi1RestConcepts.java",
+            "url": "/examples/pkg12restapi/restapi1RestConcepts",
+            "className": "restapi1RestConcepts",
+            "role": "REST"
+          }
+        ]
+      }
+    },
+    {
+      "concept": "JPA",
+      "coverage": "C",
+      "counts": {
+        "lessons": 1,
+        "lessonsStrong": 0,
+        "examples": 0,
+        "examplesStrong": 0,
+        "references": 0,
+        "interviews": 89,
+        "interviewsStrong": 7,
+        "leetcode": 0,
+        "projects": 1,
+        "versions": 0
+      },
+      "strongLessons": [],
+      "strongExamples": [],
+      "strongReferences": [],
+      "strongInterviewsSample": [
+        {
+          "title": "Spring Data JPA repository magic?",
+          "url": "/docs/03-interview--15-SpringBoot#11-spring-data-jpa-repository-magic"
+        },
+        {
+          "title": "@DataJpaTest slice?",
+          "url": "/docs/03-interview--15-SpringBoot"
+        },
+        {
+          "title": "JDBC, JPA & Hibernate ΓÇö Interview Questions (82+)",
+          "url": "/docs/03-interview--16-JdbcJpaHibernate"
+        },
+        {
+          "title": "JPA vs Hibernate vs JDBC?",
+          "url": "/docs/03-interview--16-JdbcJpaHibernate#5-jpa-vs-hibernate-vs-jdbc"
+        },
+        {
+          "title": "equals/hashCode JPA?",
+          "url": "/docs/03-interview--16-JdbcJpaHibernate"
+        },
+        {
+          "title": "toString JPA?",
+          "url": "/docs/03-interview--16-JdbcJpaHibernate"
+        },
+        {
+          "title": "Pagination JPA?",
+          "url": "/docs/03-interview--16-JdbcJpaHibernate"
+        }
+      ],
+      "strongLeetcodeSample": [],
+      "projects": [
+        {
+          "title": "Notes API (Spring Boot + H2)",
+          "url": "/projects#04-notes-api"
+        }
+      ],
+      "strongVersionsSample": [],
+      "explicitFromPrimaryLesson": {
+        "interview": [],
+        "reference": [],
+        "projects": [],
+        "relatedExamples": []
+      }
+    }
+  ]
+}

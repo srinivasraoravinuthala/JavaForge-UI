@@ -49,6 +49,10 @@ const collections = readFileSync('dist/docs/03-interview--03-Collections.html', 
 const puzzles = readFileSync('dist/docs/03-interview--17-PrintPuzzles.html', 'utf8')
 const collectionsJson = JSON.parse(readFileSync('public/content/pages/docs/03-interview--03-Collections.json', 'utf8'))
 const searchDocs = JSON.parse(searchIndex)
+const conceptSearchDocs = searchDocs.filter((doc) => doc.type === 'concept')
+if (conceptSearchDocs.length !== 23) failures.push(`concept search count ${conceptSearchDocs.length}`)
+if (new Set(conceptSearchDocs.map((doc) => doc.url)).size !== conceptSearchDocs.length) failures.push('concept search url dupes')
+if (conceptSearchDocs.some((doc) => !doc.url.startsWith('/concepts/') || doc.url === '/concepts')) failures.push('concept search url shape')
 const hashmap = searchDocs.find((doc) => doc.type === 'interview' && doc.title === 'How does HashMap work internally?' && doc.url.includes('03-interview--03-Collections'))
 const rapid = searchDocs.find((doc) => doc.title === 'Is Map a Collection?')
 const css = readFileSync('dist/assets/' + readdirSync('dist/assets').find((name) => name.endsWith('.css')), 'utf8')
@@ -109,10 +113,102 @@ if (!canonical(lcSolutionHtml).endsWith('/examples/pkg5leetcode/blind75_LC1TwoSu
 if (canonical(lcSolutionHtml).includes('#')) failures.push('leetcode fragment canonical')
 const twoSumHit = searchDocs.find((doc) => doc.type === 'leetcode' && doc.title === 'Two Sum' && doc.url.includes('blind75_LC1TwoSum'))
 if (!twoSumHit || !twoSumHit.url.startsWith('/examples/')) failures.push('leetcode search destination')
-if ((sitemap.match(/<loc>/g) || []).length !== 569) failures.push('sitemap count')
+const conceptsModel = JSON.parse(readFileSync('public/content/concepts.json', 'utf8'))
+const sitemapLocs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1])
+const conceptSitemap = sitemapLocs.filter((loc) => loc.endsWith('/concepts') || loc.includes('/concepts/'))
+const nonConceptSitemap = sitemapLocs.length - conceptSitemap.length
+if (nonConceptSitemap !== 570) failures.push(`non-concept sitemap count ${nonConceptSitemap}`)
+if (conceptSitemap.length !== 1 + conceptsModel.concepts.length) failures.push(`concept sitemap count ${conceptSitemap.length}`)
+if (new Set(sitemapLocs).size !== sitemapLocs.length) failures.push('sitemap duplicates')
+if (!sitemap.includes('/concepts</loc>')) failures.push('concepts index sitemap')
+if (!sitemap.includes('/concepts/strings</loc>')) failures.push('strings concept sitemap')
+if (!sitemap.includes('/concepts/hashmap</loc>')) failures.push('hashmap concept sitemap')
+if (!sitemap.includes('/concepts/concurrency</loc>')) failures.push('concurrency concept sitemap')
+if (sitemap.includes('/concepts/not-a-real-concept')) failures.push('invalid concept in sitemap')
 if (sitemap.includes('/search')) failures.push('search in sitemap')
 if (sitemap.includes('/bookmarks')) failures.push('bookmarks in sitemap')
 if (!sitemap.includes('/versions</loc>')) failures.push('version index sitemap')
+
+const conceptsIndexHtml = readFileSync('dist/concepts.html', 'utf8')
+if ((conceptsIndexHtml.match(/<h1/g) || []).length !== 1) failures.push('concepts index h1')
+if (!conceptsIndexHtml.includes('>Concepts<')) failures.push('concepts index title')
+if (!canonical(conceptsIndexHtml).endsWith('/concepts')) failures.push('concepts index canonical')
+if (canonical(conceptsIndexHtml).includes('#')) failures.push('concepts index fragment canonical')
+if (!conceptsIndexHtml.includes('property="og:title"')) failures.push('concepts index og')
+if (!conceptsIndexHtml.includes('/concepts/strings')) failures.push('concepts index link strings')
+if (!conceptsIndexHtml.includes('Coverage A') || !conceptsIndexHtml.includes('Coverage B')) failures.push('concepts index groups')
+if ((conceptsIndexHtml.match(/<h2/g) || []).length < 2) failures.push('concepts index heading hierarchy')
+
+const stringsHtml = readFileSync('dist/concepts/strings.html', 'utf8')
+if ((stringsHtml.match(/<h1/g) || []).length !== 1) failures.push('strings concept h1')
+if (!stringsHtml.includes('>Strings<')) failures.push('strings concept title')
+if (!canonical(stringsHtml).endsWith('/concepts/strings')) failures.push('strings concept canonical')
+if (canonical(stringsHtml).includes('#')) failures.push('strings concept fragment canonical')
+if (!stringsHtml.includes('property="og:title"')) failures.push('strings concept og')
+if (!stringsHtml.includes('name="description"')) failures.push('strings concept description')
+if (!stringsHtml.includes('aria-label="Breadcrumb"')) failures.push('strings concept breadcrumb')
+if (!stringsHtml.includes('id="concept-learn"') || !stringsHtml.includes('id="concept-code"')) failures.push('strings concept flow sections')
+if (!stringsHtml.includes('id="concept-practice"') || !stringsHtml.includes('id="concept-interview"')) failures.push('strings concept practice/interview')
+if (!stringsHtml.includes('/docs/02-learn--08-Strings')) failures.push('strings lesson link')
+if (!stringsHtml.includes('/examples/pkg1core/core9StringsDemo')) failures.push('strings example link')
+if (!stringsHtml.includes('Where it fits')) failures.push('strings fit section')
+if ((stringsHtml.match(/<h1/g) || []).length !== 1 || !(stringsHtml.match(/<h2/g) || []).length) failures.push('strings heading hierarchy')
+
+const hashmapHtml = readFileSync('dist/concepts/hashmap.html', 'utf8')
+if (!hashmapHtml.includes('>HashMap<')) failures.push('hashmap concept title')
+if (!canonical(hashmapHtml).endsWith('/concepts/hashmap')) failures.push('hashmap concept canonical')
+if (!hashmapHtml.includes('href="/docs/') && !hashmapHtml.includes('href="/examples/')) {
+  failures.push('hashmap concept resource links')
+}
+if (!hashmapHtml.includes('id="concept-learn"')) failures.push('hashmap learn section')
+if (!hashmapHtml.includes('id="concept-code"')) failures.push('hashmap code section')
+if (!hashmapHtml.includes('/docs/02-learn--17-Collections')) failures.push('hashmap collections lesson link')
+if (!hashmapHtml.includes('core29HashMapDemo') && !hashmapHtml.includes('/examples/pkg1core/core29HashMapDemo')) {
+  failures.push('hashmap key-contract demo link')
+}
+if (!hashmapHtml.includes('id="concept-interview"')) failures.push('hashmap interview section')
+if (!hashmapHtml.includes('id="concept-practice"')) failures.push('hashmap practice section')
+if (hashmapHtml.includes('id="concept-projects"')) failures.push('hashmap empty projects section')
+if (hashmapHtml.includes('LeetCode: 0') || hashmapHtml.includes('Projects: 0')) failures.push('hashmap zero counts')
+
+const collectionsHtml = readFileSync('dist/docs/02-learn--17-Collections.html', 'utf8')
+if (!collectionsHtml.includes('id="hashmap"') && !collectionsHtml.includes('>HashMap<')) failures.push('collections hashmap section')
+if (!collectionsHtml.includes('3-how-does-hashmap-work-internally')) failures.push('collections hashmap interview bridge')
+if (!collectionsHtml.includes('core29HashMapDemo')) failures.push('collections hashmap demo mention')
+if (!collectionsHtml.includes('blind75_LC1TwoSum')) failures.push('collections hashmap practice bridge')
+
+const concurrencyHtml = readFileSync('dist/concepts/concurrency.html', 'utf8')
+if (!concurrencyHtml.includes('>Concurrency<')) failures.push('concurrency concept title')
+if (!canonical(concurrencyHtml).endsWith('/concepts/concurrency')) failures.push('concurrency concept canonical')
+if (!concurrencyHtml.includes('id="concept-learn"') || !concurrencyHtml.includes('id="concept-code"')) failures.push('concurrency learn/code')
+if (concurrencyHtml.includes('id="concept-practice"')) failures.push('concurrency empty practice')
+if (!concurrencyHtml.includes('id="concept-reference"') && !concurrencyHtml.includes('id="concept-versions"')) {
+  failures.push('concurrency reference or versions')
+}
+
+const optionalHtml = readFileSync('dist/concepts/optional.html', 'utf8')
+if (!optionalHtml.includes('id="concept-related"')) failures.push('optional related section')
+if (!optionalHtml.includes('/concepts/')) failures.push('optional related link')
+
+if (existsSync('dist/concepts/spring-boot.html') || existsSync('dist/concepts/springbootintro.html')) {
+  failures.push('out-of-slice spring concept prerendered')
+}
+
+const stringsLessonHtml = readFileSync('dist/docs/02-learn--08-Strings.html', 'utf8')
+if (!stringsLessonHtml.includes('related-concepts') || !stringsLessonHtml.includes('/concepts/strings')) {
+  failures.push('strings lesson related concept chip')
+}
+const stringsExampleHtml = readFileSync('dist/examples/pkg1core/core9StringsDemo.html', 'utf8')
+if (!stringsExampleHtml.includes('/concepts/strings')) failures.push('strings example related concept chip')
+if (!readFileSync('dist/index.html', 'utf8').includes('/concepts')) failures.push('concepts nav link missing')
+for (const concept of conceptsModel.concepts) {
+  const htmlPath = `dist/concepts/${concept.slug}.html`
+  const pagePath = `public/content/pages/concepts/${concept.slug}.json`
+  if (!existsSync(htmlPath) || !existsSync(pagePath)) failures.push(`missing concept route ${concept.slug}`)
+  else if (!sitemap.includes(`/concepts/${concept.slug}</loc>`)) failures.push(`sitemap missing concept ${concept.slug}`)
+}
+if (existsSync('dist/concepts/not-a-real-concept.html')) failures.push('unknown concept prerendered')
+if (existsSync('public/content/pages/concepts/not-a-real-concept.json')) failures.push('unknown concept page json')
 const java25 = JSON.parse(readFileSync('public/content/pages/versions/java-25.json', 'utf8'))
 const java25Html = readFileSync('dist/versions/java-25.html', 'utf8')
 const java21Html = readFileSync('dist/examples/pkg2versions/versions6Java21Features.html', 'utf8')
@@ -156,7 +252,7 @@ for (const feature of java25.java25.features) {
   if (!java25Html.includes(`id="jep-${feature.jep}"`)) failures.push(`missing jep section ${feature.jep}`)
   if (!java25Html.includes(`https://openjdk.org/jeps/${feature.jep}`)) failures.push(`missing jep url ${feature.jep}`)
 }
-if (!java25Html.includes('leaves JavaMastery')) failures.push('external link label')
+if (!java25Html.includes('leaves JavaForge')) failures.push('external link label')
 const structured = java25.java25.features.find((feature) => feature.jep === 505)
 if (structured?.status !== 'Preview') failures.push('structured concurrency status')
 const featureIds = new Set()

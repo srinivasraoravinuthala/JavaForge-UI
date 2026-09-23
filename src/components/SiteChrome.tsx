@@ -16,10 +16,11 @@ export function SiteHeader({
     <header className="site-header">
       <Link className="brand" to="/">
         <Logo />
-        <span>JavaMastery</span>
+        <span>JavaForge</span>
       </Link>
       <nav className="nav-main" aria-label="Primary">
         <NavLink to="/learn">Learn</NavLink>
+        <NavLink to="/concepts">Concepts</NavLink>
         <NavLink to="/examples">Code</NavLink>
         <NavLink to="/projects">Projects</NavLink>
       </nav>
@@ -30,7 +31,7 @@ export function SiteHeader({
             <path d="M10.5 10.5 L14 14" stroke="currentColor" strokeWidth="1.5" />
           </svg>
           <span>Search</span>
-          <span className="wide-only"> JavaMastery</span>
+          <span className="wide-only"> JavaForge</span>
           <kbd className="wide-only">Ctrl K</kbd>
         </button>
         <a className="text-button wide-only" href={SOURCE}>Source</a>
@@ -46,9 +47,10 @@ export function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="inner">
-        <p>JavaMastery. Chapters and Java files live in the curriculum. Bookmarks and your place in the path stay in this browser.</p>
+        <p>JavaForge. Chapters and Java files live in the curriculum. Bookmarks and your place in the path stay in this browser.</p>
         <nav aria-label="Footer">
           <Link to="/learn">Learning path</Link>
+          <Link to="/concepts">Concepts</Link>
           <Link to="/examples">Code</Link>
           <Link to="/projects">Projects</Link>
           <Link to="/docs/03-interview--00-INDEX">Interview</Link>
@@ -66,6 +68,7 @@ export function MobileNav() {
     <nav className="bottom-nav" aria-label="Mobile">
       <NavLink to="/" end>Home</NavLink>
       <NavLink to="/learn">Learn</NavLink>
+      <NavLink to="/concepts">Concepts</NavLink>
       <NavLink to="/examples">Code</NavLink>
       <NavLink to="/projects">Projects</NavLink>
     </nav>

@@ -59,6 +59,8 @@ export interface PageData {
   robots: string
   breadcrumbs?: Crumb[]
   jsonLd?: unknown
+  /** Deterministic concept landings that list this page as a resource. */
+  relatedConcepts?: { title: string; href: string }[]
   home?: {
     counts: { lessons: number; javaFiles: number; packages: number; interviewTopics: number }
     start: NavLink | null
@@ -141,6 +143,63 @@ export interface PageData {
     previous: NavLink | null
     next: NavLink | null
   }
+  conceptsIndex?: {
+    blurb?: string
+    groups?: {
+      id: string
+      label: string
+      note?: string
+      items: ConceptIndexItem[]
+    }[]
+    /** @deprecated Phase 13B flat list; prefer groups */
+    items?: ConceptIndexItem[]
+  }
+  conceptPage?: {
+    slug: string
+    title: string
+    coverage: string
+    aliases: string[]
+    summary?: string
+    fit?: { label: string; href: string | null }[]
+    packages: string[]
+    packageLabels?: { pkg: string; role: string }[]
+    topics: string[]
+    groups: {
+      lessons: ConceptResourceRef[]
+      examples: ConceptResourceRef[]
+      references: ConceptResourceRef[]
+      interviews: ConceptResourceRef[]
+      leetcode: ConceptResourceRef[]
+      projects: ConceptResourceRef[]
+      versions: ConceptResourceRef[]
+    }
+    related: { title: string; href: string; kind: string; evidence: string }[]
+  }
+}
+
+export interface ConceptIndexItem {
+  title: string
+  slug: string
+  href: string
+  coverage: string
+  resources: number
+  topic?: string | null
+  signals?: {
+    lesson: boolean
+    code: boolean
+    interview: boolean
+    practice: boolean
+    project: boolean
+  }
+}
+
+export interface ConceptResourceRef {
+  title: string
+  url: string
+  file?: string
+  pkg?: string
+  context?: string
+  description?: string
 }
 
 export const SITE_ORIGIN = (import.meta.env.VITE_SITE_URL || 'https://javamastery.srinivasrao.co.in').replace(/\/$/, '')
@@ -154,8 +213,8 @@ export function notFound(pathname: string): PageData {
   return {
     kind: 'notfound',
     url: pathname,
-    title: 'Page not found — JavaMastery',
-    description: 'That page is not in the JavaMastery library.',
+    title: 'Page not found — JavaForge',
+    description: 'That page is not in the JavaForge library.',
     canonicalPath: pathname,
     robots: 'noindex,follow',
   }
