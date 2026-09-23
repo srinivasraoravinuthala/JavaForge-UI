@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url'
 const UI_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const EXPECTED = resolve(UI_ROOT, '..', 'JavaForge')
 const DEFAULT_REPO = 'https://github.com/srinivasraoravinuthala/JavaForge.git'
-const DEFAULT_REF = 'bddc5ccbd1dbef9aaa9b4b860aca916ac7c98774'
+const DEFAULT_REF = 'f82bf5b78b38df435507ab213202ae060555b461'
 const ARCHIVE_HOSTS = new Set(['github.com', 'codeload.github.com'])
 
 const repo = process.env.JAVAFORGE_REPO || DEFAULT_REPO
